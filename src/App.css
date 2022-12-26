@@ -1,38 +1,387 @@
-.App {
+.divbtn{
+  float: right;
+  margin-right: 3px;
+}
+
+body{
+  background-color: #f2eef4 !important;
+}
+.bg{
+  padding-bottom: 50px;
+}
+.setOne{
+  /* height: 620px; */
+  background-color: #d9cce0;
+}
+
+.setTwo{
+  /* height: 620px; */
+  background-color: #f1dee2;
+}
+.wholeRow{
+  border-radius: 5px 0px 0px 5px !important;
+}
+.wholerow{
+  border-radius: 0px 5px 5px 0px !important;
+}
+.textOne{
+  font-size: 40px;
+  font-weight: 500;
+  font-family:'Times New Roman', Times, serif;
+  /* outline-style: dotted !important; */
+}
+.textTwo{
+  font-size: 30px;
+  font-weight: 500;
+  font-family:'Times New Roman', Times, serif;
+  margin-bottom: -7px;
+}
+.app{
+  margin-top: -20px;
+}
+.email_login{
+background-color: #f2eef4;
+}
+
+.planSwitch,
+.planSwitch * {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+.planSwitch {
+  display: block;
+  /* width: 250% !important; */
+  max-width: 50em;
+  /* margin: 2em auto; */
+  height: 2.5em;
+  /* left: 19px; */
+  font-size: 10pt;
+  border-radius: .25em;
+  background: #f2eef4;
+  box-shadow: inset rgba(0,0,0,.1) 0px .25em .5em;
+  position: relative;
+}
+.planSwitch input {
+  display: none;
+}
+.planSwitch label {
+  width: 33.3333%;
+  float: left;
   text-align: center;
+  line-height: 2.5em;
+  color: #222;
+  position: relative;
+  z-index: 500;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+   /* font-weight: 500 !important; */
+   font-size: larger;
+   font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   font-weight: 500 !important;
+   /* padding-top: 10px; */
+  
+ 
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.planSwitch input:checked + label {
+  color: black;
+  /* text-shadow: rgba(0,0,0,.1) 0px -1px 2px; */
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.indicator {
+  display: block;
+  width: 50.3333%;
+  height: 2.5em;
+  background: #d9cce0;
+ 
+  /* box-shadow: inset #f1dee2 0 -.25em 1em, inset #fff 0 1px 1px; */
+  /* border: 1px solid #f60; */
+  border-radius: .25em;
+  position: absolute;
+  /* top: 0; */
+  z-index: 250;
+  transition: left .2s ease-in-out;
+}
+.planSwitch input:first-of-type:checked ~ .indicator {
+  left: 0;
+}
+.planSwitch input:nth-of-type(2):checked ~ .indicator {
+  left: 48.3333%;
+}
+.planSwitch input:nth-of-type(3):checked ~ .indicator {
+  left: 66.6666%;
+}
+@media (min-width: 500px) {
+  .planSwitch {
+    font-size: 11pt;
   }
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.gender{
+  font-size: larger;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: 500 !important;
+  padding-top: 5px !important;
+}
+.blood{
+  background-color: #fff;
+}
+.btn_bg{
+  margin-top: 20px !important;
+  margin-left: -11px !important;
+  margin-right: -11px !important;
+  margin: 0;
+  height: 50px;
+  background-color: whitesmoke;
+}
+.obw_logo_two{
+  margin-top: 30px;
+}
+.reset{
+  margin-top: 6px;
+  margin-left: 10px !important;
+  background-color: white !important;
+  color: black !important;
+  border: 1px solid #d9cce0 !important;
+  margin-right: 10px !important;
+}
+.reset:hover{
+  background-color: #d9cce0 !important;
+  border: 1px solid #d9cce0 !important;
+}
+.submit{
+  margin-top: 6px;
+  background-color: #4677ff !important;
+  color: #fff !important;
+  /* margin-right: auto !important; */
+  float: right;
+}
+.submit:hover{
+  background-color: #d9cce0 !important;
+  border: 1px solid #d9cce0 !important;
+  color: black !important;
+}
+.login{
+  display: flex !important;
+  justify-content: center !important;
+ margin-top: 23% !important;
+}
+.padd{
+  margin-left: -30px;
+}
+.login_btn{
+  width: 30% !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+.center{
+ margin-top: 10% !important;
+ padding-top: 5%;
+ padding-bottom: 5%;
+ border-radius: 10px;
+ box-shadow: 0px 0px 40px 1px grey;
+ font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.popup_btn:hover{
+color: black !important;
+background-color: #d9cce0 !important;
+border: 1px solid gray !important;
+}
+.popup_btn{
+  background-color: #4676ff !important;
+  color: #e6eeff !important;
+  font-size: 19px !important;
+  border: none !important;
+  margin-top: 10px !important;
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  border: 1px solid gray !important;
+}
+.obw_logo_two{
+  width: 400px;
+  margin-top: 43%;
+  
+}
+.col_span{
+  width: 50% !important;
+  padding-right: 50% !important;
+  max-width: 200px !important;
+}
+td {
+  display: table-cell !important;
+vertical-align:var(#4677ff) !important;
+ /* padding: 100px !important; */
+ width: 30% !important;
+}
+body{
+  background-color: #fff !important;
 }
 
-.App-link {
-  color: #61dafb;
+.Login_image_2{
+  width: 75%;
+  margin-top: 20px;
+  border-radius: 10px;
+  margin-left: 50px;
 }
+.input_login{
+margin-top: 180px !important;
+}
+.color{
+  color: #00364d;
+  font-size: 25px;
+  cursor: pointer;
+  margin-top: 1px;
+  }
+  .popup_btn:hover{
+      color: black !important;
+      background-color: #d9cce0 !important;
+      border: 1px solid gray !important;
+      }
+      .btn_display{
+        display:flex !important;
+      }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+      .span_margin{
+        margin-left:10px;
+      }
+      .textarea{
+        width: 210px;
+      }
+      .id_display{
+        display: none !important;
+      }
+    .obw_Logo{
+      width: 50% !important;
+      
+    }
+    .obw_Logo_two{
+      width: 100%;
+    }
+    .popup_text{
+      padding: 140px;
+      color: #4a2782;
+    }
+    .Obw_logo{
+      width:50% !important;
+    
+    }
+    .obw_logo{
+      width:80% !important;
+    }
+    .Obw_logo_login{
+      width:70% !important;
+      padding-left: 150px;
+    }
+    .emp_create{
+      color: #46227f;
+      box-shadow: 0px 0px 40px 1px grey;
+      border-radius: 10px;
+      margin-top: 40px;
+    }
+    .popup_page{
+      color:#f28020;
+    }
+    /* .emp_create_two{
+      color: #46227f;
+      box-shadow: 0px 0px 40px 0px grey;
+      border-radius: 10px;
+      margin-top: 40px;
+    } */
+    .login_bg{
+      box-shadow: 0px 0px 20px 1px grey;
+      border-radius: 10px;
+      margin-top: 40px;
+    }
+    /* .login_head{
+
+    } */
+.emp_list_head{
+  font-family:Georgia, 'Times New Roman', Times, serif !important;
+  font-size: 35px;
+}
+.emp_list_shadow{
+  box-shadow: 0px 0px 20px 1px grey;
+  border-radius: 10px;
+}
+.emp_details{
+  box-shadow: 0px 0px 20px 1px grey !important;
+  border-radius: 10px !important;
+margin-top: 40px !important;
+margin-bottom: 40px !important;
+}
+.emp_details_border{
+  border: 1px solid #316394;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+/* .emp_name{
+  padding-top: 20px !important;
+  border-bottom: 1px solid #316394;
+} */
+.Animate_one{
+  animation: port 10s 1;
+  letter-spacing: 10px;
+}
+@keyframes port{
+
+  from{
+ letter-spacing: 15px;
+ color: skyblue;
+
+ }
+ to{
+  text-shadow: 0 0 60px skyblue;
+ }
+}
+.Animate_2{
+  animation: porttwo 5s 1;
+}
+@keyframes porttwo{
+
+  from{
+ 
+width: 300px;
+ }
+ to{
+  width: 400px;
+ }
+}
+.color_2{
+  color: darkslateblue;
+}
+.color_3{
+  color: #FF5C5C;
+}
+.color_4{
+  color: #288bdb;
+}
+.top_nav{
+  background-color: #f1dee2;
+
+  margin-left: -12px;
+  margin-right: -12px;
+  padding-bottom: 55px;
+}
+.table_body{
+  background-color: #f1dee2;
+  margin-left: -12px;
+  margin-right: -12px;
+}
+.thead_bg{
+  background-color: #d9cce0 !important;  
+  border: 0.5px solid gray;
+  border-radius: 20px !important;
+}
+.thead_bg>tr{
+  color: black !important;
+  font-weight: 500;
+}
+.thead_white{
+  background-color:white;
+  border: 1px solid grey;
 }
