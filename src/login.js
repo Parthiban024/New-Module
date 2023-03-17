@@ -50,9 +50,11 @@ const LoginPage = (event) => {
         </div>
         <div className='col-6'>
           <div className='container input_login'>
-            <div className=' d-flex justify-content-center'>
+            <div className='d-flex justify-content-center'>
               <i className="fas fa-light fa-user color"></i>
+              
             </div>
+            <h5 className='text-center mt-2'>LOGIN HERE</h5>
             <div>
               <form autoComplete='off' onSubmit={dis}>
                 <div className='login_form'>

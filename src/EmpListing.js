@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate, Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
-
+import Objectways from "./Images/Objectways.svg";
 import Swal from "sweetalert2";
 
 const EmpListing = () => {
@@ -47,7 +47,11 @@ const EmpListing = () => {
     <div className="container mt-5 emp_list_shadow">
       <div className="">
         <div className="card-title top_nav">
-          <h2 className="text-center pt-4 emp_list_head">EMPLOYEE'S LIST</h2>
+        
+          <div className=' d-flex justify-content-center'>
+              <img src={Objectways} alt="Logo" className='logo_details mt-3' />
+            </div>
+            <h2 className="text-center pt-4 emp_list_head">EMPLOYEE'S LIST</h2>
           <div className="divbtn">
             <Link to="/login" className="btn btn-success mb-3">Logout</Link>
           </div>

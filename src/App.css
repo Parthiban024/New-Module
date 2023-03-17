@@ -228,7 +228,7 @@ body{
   margin-left: 50px;
 }
 .input_login{
-margin-top: 180px !important;
+margin-top: 145px !important;
 }
 .color{
   color: #00364d;
@@ -301,7 +301,7 @@ margin-top: 180px !important;
     } */
 .emp_list_head{
   font-family:Georgia, 'Times New Roman', Times, serif !important;
-  font-size: 35px;
+  font-size: 22px;
 }
 .emp_list_shadow{
   box-shadow: 0px 0px 20px 1px grey;
@@ -313,11 +313,13 @@ margin-top: 180px !important;
 margin-top: 40px !important;
 margin-bottom: 40px !important;
 }
-.emp_details_border{
+.emp_details_border {
   border: 1px solid #316394;
   margin-top: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 /* .emp_name{
   padding-top: 20px !important;
@@ -384,4 +386,21 @@ width: 300px;
 .thead_white{
   background-color:white;
   border: 1px solid grey;
+}
+.logo_details{
+  width: 250px;
+}
+.down_btn{
+  float: right;
+  margin-top: -40px !important;
+  margin-right: 20px;
+}
+
+.input_login{
+border-radius: 10px;
+background-color: whitesmoke;
+width: 300px !important;
+padding-top: 30px;
+padding-bottom: 20px;
+box-shadow: 0px 0px 50px 1px whitesmoke !important;
 }
