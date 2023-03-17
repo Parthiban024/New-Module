@@ -18,7 +18,7 @@ const EmpListing = () => {
   }
   const Removefunction = (id) => {
     if (window.confirm('Do you want to remote')) {
-      fetch("https://my-server.vercel.app/employee/" + id, {
+      fetch("https://new-module-of3z-4lrjzg23x-parthiban024.vercel.app/employee/" + id, {
         method: "DELETE",
       }).then((res) => {
         Swal.fire(
@@ -35,7 +35,7 @@ const EmpListing = () => {
     navigate();
   }
   useEffect(() => {
-    fetch("https://my-server.vercel.app/employee").then((res) => {
+    fetch("https://new-module-of3z-4lrjzg23x-parthiban024.vercel.app/employee").then((res) => {
       return res.json();
     }).then((resp) => {
       empdatachange(resp);

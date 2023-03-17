@@ -65,7 +65,7 @@ const EmpCreate = () => {
 
     //  
 
-    fetch("https://my-server.vercel.app/employee", {
+    fetch("https://new-module-of3z-4lrjzg23x-parthiban024.vercel.app/employee", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(empdata)

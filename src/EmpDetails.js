@@ -11,7 +11,7 @@ const EmpDetails = () => {
 
   const [empdata, empdatachange] = useState({})
   useEffect(() => {
-    fetch("https://my-server.vercel.app/employee/" + empid).then((res) => {
+    fetch("https://new-module-of3z-4lrjzg23x-parthiban024.vercel.app/employee/" + empid).then((res) => {
       return res.json();
     }).then((resp) => {
       empdatachange(resp);
