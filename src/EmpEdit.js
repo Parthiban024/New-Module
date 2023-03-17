@@ -29,17 +29,17 @@ const EmpEdit = () => {
       idchange(resp.id);
       namechange(resp.name);
       lastnamechange(resp.lastname);
-      emailchange(resp.email);
-      birthdaychange(resp.birthday);
-      genderchange(resp.gender);
-      bloodgroupchange(resp.bloodgroup);
-      pannochange(resp.panno);
-      aadharnochange(resp.aadharno);
-      personalcontactnochange(resp.personalcontactno);
-      emergencycontactnochange(resp.emergencycontactno);
-      presentaddresschange(resp.presentaddress);
-      permanentaddresschange(resp.permanentaddress);
-      passedoutyearchange(resp.passedoutyear);
+      reviewerNamechange(resp.reviewerName);
+      reviewPeriodchange(resp.reviewPeriod);
+      reviewPeriodtwochange(resp.reviewPeriodTwo);
+      selectOnechange(resp.selectOne);
+      selectTwochange(resp.selectTwo);
+      selectThreechange(resp.selectThree);
+      selectFourchange(resp.selectFour);
+      selectFivechange(resp.selectFive);
+      selectSixchange(resp.selectSix);
+      selectSevenchange(resp.selectSeven);
+      selectEightchange(resp.selectEight);
       graduatechange(resp.graduate);
       degreechange(resp.degree);
       agechange(resp.age);
@@ -61,40 +61,31 @@ const EmpEdit = () => {
 
   const navigate=useNavigate();
 
-  const[id,idchange ]=useState("");
-  const [name, namechange] =useState("");
-  const [lastname, lastnamechange] =useState("");
-  const[email,emailchange] =useState("");
-  const[birthday,birthdaychange] =useState("");
-  const[gender,genderchange] =useState("");
-  const[bloodgroup,bloodgroupchange] =useState("");
-  const[panno,pannochange] =useState("");
-  const [aadharno, aadharnochange] =useState("");
-  const [personalcontactno, personalcontactnochange] =useState("");
-  const [emergencycontactno, emergencycontactnochange] =useState("");
-  const [presentaddress, presentaddresschange] =useState("");
-  const [permanentaddress, permanentaddresschange] =useState("");
-  const [passedoutyear, passedoutyearchange] =useState("");
-  const [graduate, graduatechange] = useState("");
-  const [degree, degreechange] =useState("");
-  const [age, agechange] =useState("");
-  const [companyname, companynamechange] =useState("");
-  const [noofyearsexperience, noofyearsexperiencechange] =useState("");
-  const [designation, designationchange] =useState("");
-  const [currentctc, currentctcchange] =useState("");
-  const [pfno, pfnochange] =useState("");
-  const [esino, esinochange] =useState("");
-  const [emppid, emppidchange] =useState("");
-  const [nameofemployee, nameofemployeechange] =useState("");
-  const [place, placechange] =useState("");
-  const [date, datechange] =useState("");
-  const [sign, signchange] =useState("");
-  const [validation, valchange] =useState("");
+  const [id, idchange] = useState("");
+  const [name, namechange] = useState("");
+  const [emppid, emppidchange] = useState("");
+  const [reviewerName, reviewerNamechange] = useState("");
+  const [reviewPeriod, reviewPeriodchange] = useState("");
+  const [reviewPeriodTwo, reviewPeriodtwochange] = useState("");
+  const [selectOne, selectOnechange] = useState("");
+  const [selectTwo, selectTwochange] = useState("");
+  const [selectThree, selectThreechange] = useState("");
+  const [selectFour, selectFourchange] = useState("");
+  const [selectFive, selectFivechange] = useState("");
+  const [selectSix, selectSixchange] = useState("");
+  const [selectSeven, selectSevenchange] = useState("");
+  const [selectEight, selectEightchange] = useState("");
+  const [selectNine, selectNinechange] = useState("");
+  const [selectTen, selectTenchange] = useState("");
+  const [place, placechange] = useState("");
+  const [date, datechange] = useState("");
+  const [sign, signchange] = useState("");
+  const [validation, valchange] = useState("");
 
 
 const handleSubmit =(e)=> {
 e.preventDefault();
-const empdata={name,lastname,email,birthday,gender,bloodgroup,panno,aadharno,personalcontactno,emergencycontactno,presentaddress,permanentaddress,graduate,passedoutyear,degree,age,companyname,noofyearsexperience,designation,currentctc,pfno,esino,emppid,nameofemployee,place,date,sign};
+const empdata = { name, emppid, reviewerName, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen, place, date, sign };
 
 // console.log({id,name,email,phone})
 fetch("http://localhost:8000/employee/"+empid,{

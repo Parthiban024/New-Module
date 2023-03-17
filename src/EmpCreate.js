@@ -39,27 +39,16 @@ const EmpCreate = () => {
   const [reviewerName, reviewerNamechange] = useState("");
   const [reviewPeriod, reviewPeriodchange] = useState("");
   const [reviewPeriodTwo, reviewPeriodtwochange] = useState("");
-  const [email, emailchange] = useState("");
-  const [birthday, birthdaychange] = useState("");
-  const [gender, genderchange] = useState("");
-  const [bloodgroup, bloodgroupchange] = useState("");
-  const [panno, pannochange] = useState("");
-  const [aadharno, aadharnochange] = useState("");
-  const [personalcontactno, personalcontactnochange] = useState("");
-  const [emergencycontactno, emergencycontactnochange] = useState("");
-  const [presentaddress, presentaddresschange] = useState("");
-  const [permanentaddress, permanentaddresschange] = useState("");
-  const [graduate, graduatechange] = useState("");
-  const [passedoutyear, passedoutyearchange] = useState("");
-  const [degree, degreechange] = useState("");
-  const [age, agechange] = useState("");
-  const [companyname, companynamechange] = useState("");
-  const [noofyearsexperience, noofyearsexperiencechange] = useState("");
-  const [designation, designationchange] = useState("");
-  const [currentctc, currentctcchange] = useState("");
-  const [pfno, pfnochange] = useState("");
-  const [esino, esinochange] = useState("");
-  const [nameofemployee, nameofemployeechange] = useState("");
+  const [selectOne, selectOnechange] = useState("");
+  const [selectTwo, selectTwochange] = useState("");
+  const [selectThree, selectThreechange] = useState("");
+  const [selectFour, selectFourchange] = useState("");
+  const [selectFive, selectFivechange] = useState("");
+  const [selectSix, selectSixchange] = useState("");
+  const [selectSeven, selectSevenchange] = useState("");
+  const [selectEight, selectEightchange] = useState("");
+  const [selectNine, selectNinechange] = useState("");
+  const [selectTen, selectTenchange] = useState("");
   const [place, placechange] = useState("");
   const [date, datechange] = useState("");
   const [sign, signchange] = useState("");
@@ -69,7 +58,7 @@ const EmpCreate = () => {
 
 
     e.preventDefault();
-    const empdata = { name, email,reviewerName, birthday, gender, bloodgroup, panno, aadharno, personalcontactno, emergencycontactno, presentaddress, permanentaddress, graduate, passedoutyear, degree, age, companyname, noofyearsexperience, designation, currentctc, pfno, esino, emppid, nameofemployee, place, date, sign };
+    const empdata = { name, emppid, reviewerName, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen, place, date, sign };
 
     //  
 
@@ -252,19 +241,19 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                          Graduate
+                        Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
 
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Graduate"
+                          label="Select"
                           className="email_login"
-                          name="passedoutyear"
-                          value={graduate}
+                          name="selectOne"
+                          value={selectOne}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => graduatechange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
                           <MenuItem value="">
@@ -293,18 +282,18 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                          Graduate
+                        Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Graduate"
+                          label="Select"
                           className="email_login"
-                          name="passedoutyear"
-                          value={graduate}
+                          name="selectTwo"
+                          value={selectTwo}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => graduatechange(e.target.value)}
+                          onChange={e => selectTwochange(e.target.value)}
                           required
                         >
                           <MenuItem value="">
@@ -337,19 +326,19 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                          Graduate
+                          Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
 
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Graduate"
+                          label="Select"
                           className="email_login"
-                          name="passedoutyear"
-                          value={graduate}
+                          name="selectThree"
+                          value={selectThree}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => graduatechange(e.target.value)}
+                          onChange={e => selectThreechange(e.target.value)}
                           required
                         >
                           <MenuItem value="">
@@ -383,19 +372,19 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                          Graduate
+                          Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
 
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Graduate"
+                          label="Select"
                           className="email_login"
-                          name="passedoutyear"
-                          value={graduate}
+                          name="selectFour"
+                          value={selectFour}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => graduatechange(e.target.value)}
+                          onChange={e => selectFourchange(e.target.value)}
                           required
                         >
                           <MenuItem value="">
@@ -430,19 +419,19 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                          Graduate
+                        Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
 
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Graduate"
+                          label="Select"
                           className="email_login"
-                          name="passedoutyear"
-                          value={graduate}
+                          name="selectFive"
+                          value={selectFive}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => graduatechange(e.target.value)}
+                          onChange={e => selectFivechange(e.target.value)}
                           required
                         >
                           <MenuItem value="">
@@ -478,19 +467,19 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                          Graduate
+                         Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
 
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Graduate"
+                          label="Select"
                           className="email_login"
-                          name="passedoutyear"
-                          value={graduate}
+                          name="selectSix"
+                          value={selectSix}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => graduatechange(e.target.value)}
+                          onChange={e => selectSixchange(e.target.value)}
                           required
                         >
                           <MenuItem value="">
@@ -522,19 +511,19 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                          Graduate
+                        Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
 
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Graduate"
+                          label="Select"
                           className="email_login"
-                          name="passedoutyear"
-                          value={graduate}
+                          name="selectSeven"
+                          value={selectSeven}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => graduatechange(e.target.value)}
+                          onChange={e => selectSevenchange(e.target.value)}
                           required
                         >
                           <MenuItem value="">
@@ -582,19 +571,19 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                          Graduate
+                        Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
 
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Graduate"
+                          label="Select"
                           className="email_login"
-                          name="passedoutyear"
-                          value={graduate}
+                          name="selectEight"
+                          value={selectEight}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => graduatechange(e.target.value)}
+                          onChange={e => selectEightchange(e.target.value)}
                           required
                         >
                           <MenuItem value="">
@@ -635,12 +624,12 @@ const EmpCreate = () => {
 
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Graduate"
+                          label="Select"
                           className="email_login"
-                          name="passedoutyear"
-                          value={graduate}
+                          name="selectNine"
+                          value={selectNine}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => graduatechange(e.target.value)}
+                          onChange={e => selectNinechange(e.target.value)}
                           required
                         >
                           <MenuItem value="">
@@ -691,12 +680,12 @@ const EmpCreate = () => {
 
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Graduate"
+                          label="Select"
                           className="email_login"
-                          name="passedoutyear"
-                          value={graduate}
+                          name="selectTen"
+                          value={selectTen}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => graduatechange(e.target.value)}
+                          onChange={e => selectTenchange(e.target.value)}
                           required
                         >
                           <MenuItem value="">
