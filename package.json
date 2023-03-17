@@ -22,6 +22,7 @@
     "file-saver": "^2.0.5",
     "formik": "^2.2.9",
     "fs": "^0.0.1-security",
+    "gh-pages": "^5.0.0",
     "http": "^0.0.1-security",
     "jquery": "^3.6.2",
     "jspdf": "^2.5.1",
@@ -53,7 +54,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "homepage": "https://Parthiban024.github.io/New-Module",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+ 
+
   },
   "eslintConfig": {
     "extends": [
@@ -72,6 +78,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  
   },
   "devDependencies": {
     "babel-plugin-react-require": "^3.1.3"
