@@ -49,6 +49,9 @@ const EmpCreate = () => {
   const [selectEight, selectEightchange] = useState("");
   const [selectNine, selectNinechange] = useState("");
   const [selectTen, selectTenchange] = useState("");
+  const [commOne, commOnechange] = useState("");
+  const [commTwo, commTwochange] = useState("");
+  const [commThree, commThreechange] = useState("");
   const [place, placechange] = useState("");
   const [date, datechange] = useState("");
   const [sign, signchange] = useState("");
@@ -58,7 +61,7 @@ const EmpCreate = () => {
 
 
     e.preventDefault();
-    const empdata = { name, emppid, reviewerName, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen, place, date, sign };
+    const empdata = { name, emppid, reviewerName,commOne, commTwo,commThree, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen, place, date, sign };
 
     //  
 
@@ -94,11 +97,14 @@ const EmpCreate = () => {
           </div>
         </div> */}
 
-          <div className="col  setTwo wholerow" >
-            <p className="textOne d-flex justify-content-center app mt-2 emp_list_head ">
-              Annual Appraisal Form
+          <div className="col  setTwo wholerow " >
+            <div className="d-flex justify-content-center">
+          <img src={Objectways} alt="Logo" className='logo_details mt-3 ' />
+          </div>
+            <h3 className="textOne d-flex justify-content-center app mt-4 emp_list_head ">
+              ANNUAL APPRAISAL FORM
 
-            </p>
+            </h3>
 
             <div className="form-group">
               <label className="id_display">ID</label>
@@ -704,29 +710,34 @@ const EmpCreate = () => {
 
               <div class="mb-3  mx-5 ">
                 <label for="exampleFormControlTextarea1" class="form-label"><h5>Comment on the employee's overall performance:</h5></label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                  name="commOne"
+                  value={commOne}
+                  onMouseDown={e => valchange(true)}
+                  onChange={e => commOnechange(e.target.value)}
+                  ></textarea>
               </div>
 
               <div className="mt-4 mx-5 p-1 heading">
                 <h5>V. REVIEWER COMMENTS(optional)</h5>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                 name="commTwo"
+                 value={commTwo}
+                 onMouseDown={e => valchange(true)}
+                 onChange={e => commTwochange(e.target.value)}
+                 ></textarea>
               </div>
 
               <div className="mt-4 mx-5 p-1 heading ">
                 <h5 >VI. ACKNOWLEDGEMENT</h5>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                name="commThree"
+                value={commThree}
+                onMouseDown={e => valchange(true)}
+                onChange={e => commThreechange(e.target.value)}
+                ></textarea>
               </div>
-
-
-
-
-
-
-
-
-
-
-              <div className="row d-flex justify-content-center">
+             <div className="row d-flex justify-content-center">
                 <div className="col-3 me-1">
                   <div className="form-group mt-4 d-flex justify-content-center">
                     <div>
@@ -757,7 +768,7 @@ const EmpCreate = () => {
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
-                        type="text"
+                        type="date"
                         name="date"
                         value={date}
                         onMouseDown={e => valchange(true)}
@@ -795,14 +806,11 @@ const EmpCreate = () => {
                 </div>
               </div>
               <div className="btn_bg">
-                <div className=" pb-5 container">
-                  <button className="btn btn-danger reset" type="reset">
-                    Reset
-                  </button>
+                <div className=" pb-5 container d-flex justify-content-center">
                   <input
                     type="submit"
                     className="btn btn-primary submit"
-                    value="Save"
+                    value="Submit"
                   ></input>
                 </div>
               </div>

@@ -157,8 +157,9 @@ background-color: #f2eef4;
   margin-top: 6px;
   background-color: #4677ff !important;
   color: #fff !important;
-  /* margin-right: auto !important; */
-  float: right;
+  font-size: 20px !important;
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
 }
 .submit:hover{
   background-color: #d9cce0 !important;
@@ -301,7 +302,7 @@ margin-top: 145px !important;
     } */
 .emp_list_head{
   font-family:Georgia, 'Times New Roman', Times, serif !important;
-  font-size: 22px;
+  font-size: 30px;
 }
 .emp_list_shadow{
   box-shadow: 0px 0px 20px 1px grey;

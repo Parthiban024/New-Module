@@ -62,30 +62,9 @@ const EmpListing = () => {
             <thead className="thead_bg text-white">
               <tr rowspan="">
                 <th colspan=''>ID</th>
-                <td colspan="">First Name</td>
-                <td colspan="">Last Name</td>
-                <td colspan="">Email</td>
-                {/* <td colspan="6">Birthday</td>
-                <td colspan="6">Gender</td>
-                <td colspan="6">Blood Group</td>
-                <td colspan="6">Pan No</td>
-                <td colspan="6">Aadhar No</td>
-                <td colspan="6">Personal Contact No</td>
-                <td colspan="6">Emergency Contact No</td>
-                <td colspan="6">Present Address</td>
-                <td colspan="6">Permanent Address</td>
-                <td colspan="6">Passed Out Year</td>
-                <td colspan="6">Degree</td>
-                <td colspan="6">Age</td>
-                <td colspan="6">Company Name</td>
-                <td colspan="6">No Of Years Experience</td>
-                <td colspan="6">Designation</td>
-                <td colspan="6">Current CTC</td>
-                <td colspan="6">Emp Id</td>
-                <td colspan="6">Name Of Employee</td>
-                <td colspan="6">Place</td>
-                <td colspan="6">Date</td>
-                <td colspan="6">Sign</td> */}
+                <td colspan="">Employee Name</td>
+                <td colspan="">Employee ID</td>
+                <td colspan="">Reviewer Name</td>
                 <td colspan="6" className="text-center">Icons</td>
               </tr>
             </thead>
@@ -95,29 +74,8 @@ const EmpListing = () => {
                   <tr className="thead_white" rowspan="" key={item.id}>
                     <td className="" colspan=''>{item.id}</td>
                     <td colspan="">{item.name}</td>
-                    <td colspan="">{item.lastname}</td>
-                    <td colspan="">{item.email}</td>
-                    {/* <td colspan="6">{item.birthday}</td>
-                    <td colspan="6">{item.gender}</td>
-                    <td colspan="6">{item.bloodgroup}</td>
-                    <td colspan="6">{item.panno}</td>
-                    <td colspan="6">{item.aadharno}</td>
-                    <td colspan="6">{item.personalcontactno}</td>
-                    <td colspan="6">{item.emergencycontactno}</td>
-                    <td colspan="6">{item.presentaddress}</td>
-                    <td colspan="6">{item.permanentaddress}</td>
-                    <td colspan="6">{item.passedoutyear}</td>
-                    <td colspan="6">{item.degree}</td>
-                    <td colspan="6">{item.age}</td>
-                    <td colspan="6">{item.companyname}</td>
-                    <td colspan="6">{item.noofyearsexperience}</td>
-                    <td colspan="6">{item.designation}</td>
-                    <td colspan="6">{item.currentctc}</td>
-                    <td colspan="6">{item.empid}</td>
-                    <td colspan="6">{item.nameofemployee}</td>
-                    <td colspan="6">{item.place}</td>
-                    <td colspan="6">{item.date}</td>
-                    <td colspan="6">{item.sign}</td> */}
+                    <td colspan="">{item.emppid}</td>
+                    <td colspan="">{item.reviewerName}</td>
                     <td colspan="" className="d-flex flex-row">
                       <a onClick={() => { LoadEdit(item.id) }} className=" me-1"> <i className="fas fa-duotone fa-pen-to-square color color_2"></i></a>
                       <a onClick={() => { Removefunction(item.id) }} className=" ps-3 me-1"><i className="fas fa-regular fa-trash color color_3"></i></a>

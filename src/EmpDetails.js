@@ -22,20 +22,26 @@ const EmpDetails = () => {
   const handleDownload = () => {
     const doc = new jsPDF();
     doc.text(`Employee Name: ${empdata.name} ${empdata.lastname} (${empdata.id})`, 10, 10);
-    doc.text(`Email: ${empdata.email}`, 10, 20);
-    doc.text(`Birthday: ${empdata.birthday}`, 10, 30);
-    doc.text(`Gender: ${empdata.gender}`, 10, 40);
-    doc.text(`Blood Group: ${empdata.bloodgroup}`, 10, 50);
-    doc.text(`Pan No: ${empdata.panno}`, 10, 60);
-    doc.text(`Aadhar No: ${empdata.aadharno}`, 10, 70);
-    doc.text(`Personal Contact No: ${empdata.personalcontactno}`, 10, 80);
-    doc.text(`Emergency Contact No: ${empdata.emergencycontactno}`, 10, 90);
-    doc.text(`Present Address: ${empdata.presentaddress}`, 10, 100);
-    doc.text(`Permanent Address: ${empdata.permanentaddress}`, 10, 110);
-    doc.text(`Graduate: ${empdata.graduate}`, 10, 120);
-    doc.text(`Passed Out Year: ${empdata.passedoutyear}`, 10, 130);
-    doc.text(`Skills: ${empdata.skills}`, 10, 140);
-    doc.text(`Skills: ${empdata.isChecked}`, 10, 140);
+    doc.text(`Employee ID: ${empdata.emppid}`, 10, 20);
+    doc.text(`Reviewer Name: ${empdata.reviewerName}`, 10, 30);
+    doc.text(`Review From: ${empdata.reviewPeriod}`, 10, 40);
+    doc.text(`Review To: ${empdata.reviewPeriodTwo}`, 10, 50);
+    doc.text(`Select One: ${empdata.selectOne}`, 10, 60);
+    doc.text(`Aadhar No: ${empdata.selectTwo}`, 10, 70);
+    doc.text(`Personal Contact No: ${empdata.selectThree}`, 10, 80);
+    doc.text(`Emergency Contact No: ${empdata.selectFour}`, 10, 90);
+    doc.text(`Present Address: ${empdata.selectFive}`, 10, 100);
+    doc.text(`Permanent Address: ${empdata.selectSix}`, 10, 110);
+    doc.text(`Graduate: ${empdata.selectSeven}`, 10, 120);
+    doc.text(`Passed Out Year: ${empdata.selectEight}`, 10, 130);
+    doc.text(`Skills: ${empdata.selectNine}`, 10, 140);
+    doc.text(`Skills: ${empdata.selectTen}`, 10, 150);
+    doc.text(`Skills: ${empdata.commOne}`, 10, 150);
+    doc.text(`Skills: ${empdata.commTwo}`, 10, 150);
+    doc.text(`Skills: ${empdata.commThree}`, 10, 150);
+    doc.text(`Place: ${empdata.place}`, 10, 160);
+    doc.text(`Date: ${empdata.date}`, 10, 170);
+    doc.text(`Sign: ${empdata.sign}`, 10, 180);
     doc.save(`Employee_${empdata.id}.pdf`);
 
   }
@@ -67,172 +73,10 @@ const EmpDetails = () => {
               </div>
               <div className='col-3 ms-3'>
                 {empdata &&
-                  <h5>{empdata.name} {empdata.lastname} ({empdata.id})</h5>
+                  <h5>{empdata.name} ({empdata.id})</h5>
                 }
               </div>
 
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>EMAIL</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.email}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>BIRTHDAY</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.birthday}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>GENDER</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.gender}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>BLOOD GROUP </h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.bloodgroup}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>PAN NO</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.panno}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>AADHAR NO</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.aadharno}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>PERSONAL CONTACT NO</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.personalcontactno}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>EMERGENCY CONTACT NO</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.emergencycontactno}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>PRESENT ADDRESS</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.presentaddress}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>PERMANENT ADDRESS</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.permanentaddress}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>GRADUATE</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.graduate}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>PASSED OUT YEARE</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.passedoutyear}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>DEGREE</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.degree}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>AGE</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.age}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>PREVIOUS COMPANY NAME</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.companyname}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>NO OF YEARS EXPERIENCE</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.noofyearsexperience}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>DESIGNATION</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.designation}</h5>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='col-3'></div>
-              <div className='col-4'>
-                <h5>CURRENT CTC</h5>
-              </div>
-              <div className='col-3 ms-3'>
-                <h5>{empdata.currentctc}</h5>
-              </div>
             </div>
             <div className='row'>
               <div className='col-3'></div>
@@ -241,6 +85,150 @@ const EmpDetails = () => {
               </div>
               <div className='col-3 ms-3'>
                 <h5>{empdata.emppid}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>REVIWER NAME</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.reviewerName}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>REVIEW FROM</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.reviewPeriod}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>REVIEW TO</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.reviewPeriodTwo}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>SELECT ONE</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.selectOne}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>SELECT TWO</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.selectTwo}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>SELECT THREE</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.selectThree}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>SELECT FOUR</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.selectFour}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>SELECT FIVE</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.selectFive}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>SELECT SIX</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.selectSix}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>SELECT SEVEN</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.selectSeven}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>SELECT EIGHT</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.selectEight}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>SELECT NINE</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.selectNine}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>SELECT TEN</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.selectTen}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>COMMENT ONE</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.commOne}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>COMMENT TWO</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.commTwo}</h5>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-3'></div>
+              <div className='col-4'>
+                <h5>COMMENT THREE</h5>
+              </div>
+              <div className='col-3 ms-3'>
+                <h5>{empdata.commThree}</h5>
               </div>
             </div>
             <div className='row'>
