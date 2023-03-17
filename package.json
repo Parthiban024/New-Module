@@ -25,6 +25,7 @@
     "gh-pages": "^5.0.0",
     "http": "^0.0.1-security",
     "jquery": "^3.6.2",
+    "json-server": "^0.17.2",
     "jspdf": "^2.5.1",
     "mongodb": "^4.12.1",
     "net": "^1.0.2",
@@ -57,9 +58,7 @@
     "eject": "react-scripts eject",
     "homepage": "https://Parthiban024.github.io/New-Module",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
- 
-
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -78,7 +77,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  
   },
   "devDependencies": {
     "babel-plugin-react-require": "^3.1.3"
