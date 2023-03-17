@@ -18,12 +18,16 @@ import validator from 'validator'
 import $ from 'jquery'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 // import crypto from 'crypto'
 
 const EmpCreate = () => {
 
   // const MongoClient = require('mongodb').MongoClient;
-  
+
 
   // const uri = "mongodb+srv://<username>:<password>@cluster0.mongodb.net/test?retryWrites=true&w=majority";
 
@@ -31,7 +35,10 @@ const EmpCreate = () => {
 
   const [id, idchange] = useState("");
   const [name, namechange] = useState("");
-  const [lastname, lastnamechange] = useState("");
+  const [emppid, emppidchange] = useState("");
+  const [reviewerName, reviewerNamechange] = useState("");
+  const [reviewPeriod, reviewPeriodchange] = useState("");
+  const [reviewPeriodTwo, reviewPeriodtwochange] = useState("");
   const [email, emailchange] = useState("");
   const [birthday, birthdaychange] = useState("");
   const [gender, genderchange] = useState("");
@@ -50,7 +57,6 @@ const EmpCreate = () => {
   const [noofyearsexperience, noofyearsexperiencechange] = useState("");
   const [designation, designationchange] = useState("");
   const [currentctc, currentctcchange] = useState("");
-  const [emppid, emppidchange] = useState("");
   const [pfno, pfnochange] = useState("");
   const [esino, esinochange] = useState("");
   const [nameofemployee, nameofemployeechange] = useState("");
@@ -58,18 +64,15 @@ const EmpCreate = () => {
   const [date, datechange] = useState("");
   const [sign, signchange] = useState("");
   const [validation, valchange] = useState("");
- 
-
 
   const handleSubmit = (e) => {
 
 
-    
     e.preventDefault();
-    const empdata = { name, lastname, email,birthday, gender, bloodgroup, panno, aadharno, personalcontactno, emergencycontactno, presentaddress, permanentaddress, graduate, passedoutyear, degree, age, companyname, noofyearsexperience, designation, currentctc,pfno,esino, emppid, nameofemployee, place, date, sign };
+    const empdata = { name, email,reviewerName, birthday, gender, bloodgroup, panno, aadharno, personalcontactno, emergencycontactno, presentaddress, permanentaddress, graduate, passedoutyear, degree, age, companyname, noofyearsexperience, designation, currentctc, pfno, esino, emppid, nameofemployee, place, date, sign };
 
-//  
-    
+    //  
+
     fetch("http://localhost:8000/employee", {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -83,708 +86,748 @@ const EmpCreate = () => {
       navigate('/popup');
     }).catch((err) => {
       console.log(err.message)
-    })  
+    })
 
-    
+
 
   }
   return (
     <div className="font_family">
-    <div className="container-fluid mt-5 bg">
-      <div className="row">
-        <div className="col-3 ms-5"></div>
-<div className="col-5 setTwo wholerow" >
-          <p className="textOne d-flex justify-content-center app mt-2 emp_list_head ">
-          ANNUAL APPRAISAL FORM
+      <div className="container px-5 mt-5 bg">
+        <div className="row">
 
-          </p>
-          <div className="form-group">
-            <label className="id_display">ID</label>
-            <input value={id} disabled="disabled" className="form-control id_display"></input>
+          {/* <div className="col-3 setOne wholeRow">
+          <div className="d-flex justify-content-center pt-3">
+            <img className="obw_logo Animate_2" src={Objectways} alt="Objectways" />
           </div>
-          <form autoComplete="off" className="scroll-to" onSubmit={handleSubmit}  id="scrollable-div">
-            <div className="row d-flex justify-content-center">
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Employee Name"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="name"
-                      value={name}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => namechange(e.target.value)}
-                      required
-                    />
-                    <div className="d-flex">
-                      {name.length === 0 && validation && <span className="text-danger">Name is required</span>}
-                    </div>
-                  </div>
-                </div>
+          <div className="d-flex justify-content-center">
+            <img className="obw_logo_two Animate_2" src={Form_Inout} alt="Form_Inout" />
+          </div>
+        </div> */}
 
-              </div>
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-     
-                  <div>
-                    <TextField
-                      label="Employee ID"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="lastname"
-                      value={lastname}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => lastnamechange(e.target.value)}
-                      required
-                    />
-                    <div>
-                      {lastname.length === 0 && validation && <span className="text-danger">LastName is required</span>}
-                    </div>
-                  </div>
-                </div>
+          <div className="col  setTwo wholerow" >
+            <p className="textOne d-flex justify-content-center app mt-2 emp_list_head ">
+              Annual Appraisal Form
 
-              </div>
+            </p>
+
+            <div className="form-group">
+              <label className="id_display">ID</label>
+              <input value={id} disabled="disabled" className="form-control id_display"></input>
             </div>
-            <div className="row d-flex justify-content-center">
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Reviewer Name"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="email"
-                      name="email"
-                      value={email}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => emailchange(e.target.value)}
-                      required
-                    />
+            <form autoComplete="off" className="scroll-to" onSubmit={handleSubmit} id="scrollable-div">
+              <div className="mt-4 mx-5 p-1 heading ">
+                <h5 class="ms-2 pt-2 " >I. EMPLOYEE INFORMATION</h5>
+              </div>
+              <div className="row d-flex justify-content-center">
+                <div className="col-5">
+                  {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
+                  <div className="col  mt-3">
+                    {/* <div className="col-5"> */}
+                    {/* <h4 class="mt-2  ">Employee Name :</h4> */}
                     <div>
-                      {email.length === 0 && validation && <span className="text-danger">Email is required</span>}
-                    </div>
-                  </div>
-                </div>
+                      {/* <label class="lsize">Employee Name :</label> */}
 
-              </div>
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Birthday"
-                      id="outlined-size-small"
-                      inputFormat="MM/DD/YYYY"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="birthday"
-                      value={birthday}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => birthdaychange(e.target.value)}
-                      required
-                    />
-                    <div>
-                      {birthday.length === 0 && validation && <span className="text-danger">Birthday is required</span>}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-           
-                {/* <div className='form-group'>
-<div className='d-flex justify-content-center'>
- <label className='mt-4 gender'>Gender : &nbsp;</label>
- <div className="planSwitch email_login mt-4">
-    
-<input 
-type="radio" 
-name="Gender" 
-id="monthly" 
-
-/> 
-<label htmlFor="monthly">&nbsp;&nbsp;&nbsp;Male</label>
-<input 
-type="radio" 
-name="Gender" 
-id="quarterly" 
-
-/>
-<label htmlFor="quarterly">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Female</label>
-<div className="indicator"></div>
-</div>
-
-</div>
- </div> */}
-
-
-            <div className="row d-flex justify-content-center">
-              <div className="col-5">
-                <div className="form-group mt-3 d-flex justify-content-center">
-                  <div>
-                  <FormControl sx={{ m: 1.2, minWidth: 210 }} size="small">
-                    <InputLabel id="demo-select-small">Gender</InputLabel>
-                    <Select
-                      labelId="demo-select-small"
-                      id="demo-select-small"
-                      label="Gender"
-                      className="email_login"
-                      name="gender"
-                      value={gender}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => genderchange(e.target.value)}
-                      required
-                    >
-                    <div>
-                      {gender.length === 0 && validation && <span className="text-danger">Gender is required</span>}
-                    </div>
-                      <MenuItem value="">
-                        <em>None</em>
-                      </MenuItem>
-                      <MenuItem value="male">male</MenuItem>
-                      <MenuItem value="female">female</MenuItem>
-                    </Select>
-                  </FormControl>
-                  </div>
-                </div>
-
-              </div>
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                  <TextField
-                      label="Blood Group"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="bloodgroup"
-                      value={bloodgroup}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => bloodgroupchange(e.target.value)}
-                      required
-                    />
-                    <div>
-                      {bloodgroup.length === 0 && validation && <span className="text-danger">Blood Group is required</span>}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="row d-flex justify-content-center">
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="PAN NO"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="panno"
-                      value={panno}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => pannochange(e.target.value)}
-                      required
-                    />
-                    <div>
-                      {panno.length === 0 && validation && <span className="text-danger">PAN NO is required</span>}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="AADHAR NO"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="aadharno"
-                      value={aadharno}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => aadharnochange(e.target.value)}
-                      required
-                    />
-                    <div>
-                      {aadharno.length === 0 && validation && <span className="text-danger">AADHAR NO is required</span>}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-            <div className="row d-flex justify-content-center">
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Personal contact NO"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="personalcontactno"
-                      value={personalcontactno}
-                      onMouseDown={e => valchange(Number)}
-                      onChange={e => personalcontactnochange(e.target.value)}
-                      required
-                    />
-                    <div>
-                      {personalcontactno.length <=9  && validation && <span className="text-danger">Enter a 10 digit No</span>}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Emergency contact NO"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="emergencycontactno"
-                      value={emergencycontactno}
-                      onMouseDown={e => valchange(Number)}
-                      onChange={e => emergencycontactnochange(e.target.value)}
-                      required
-                    />
-                    <div>
-                      {emergencycontactno.length <=9  && validation && <span className="text-danger">Enter a 10 digit No</span>}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-            <div className="row d-flex justify-content-center">
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div className="textarea">
-                    <TextField
-                      label="Present Address"
-                      id="outlined-multiline-static"
-                      size="small"
-                      multiline
-                      rows={5}
-                      className="email_login textarea"
-                      type="text"
-                      name="presentaddress"
-                      value={presentaddress}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => presentaddresschange(e.target.value)}
-                      required
-                    />
-                    <div>
-                      {presentaddress.length === 0 && validation && <span className="text-danger">Required</span>}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Permanent Address"
-                      id="outlined-multiline-static"
-                      size="small"
-                      multiline
-                      rows={5}
-                      className="email_login textarea"
-                      type="text"
-                      name="permanentaddress"
-                      value={permanentaddress}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => permanentaddresschange(e.target.value)}
-                      required
-                    />
-                    <div>
-                      {permanentaddress.length === 0 && validation && <span className="text-danger">Required</span>}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-            <div className="row d-flex justify-content-center">
-              <div className="col-5">
-                <div className="form-group mt-3 d-flex justify-content-center">
-                  <div>
-                  <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                  <InputLabel id="demo-select-small">
-                    Graduate
-                  </InputLabel>
-                  <Select
-                    labelId="demo-select-small"
-                    id="demo-select-small"
-                    label="Graduate"
-                    className="email_login"
-                    name="passedoutyear"
-                    value={graduate}
-                    onMouseDown={e => valchange(true)}
-                    onChange={e => graduatechange(e.target.value)}
-                    required
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value="UG">UG</MenuItem>
-                    <MenuItem value="PG">PG</MenuItem>
-                  </Select>
-                </FormControl>
-                  </div>
-                </div>
-
-              </div>
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                  <TextField
-                      label="Degree"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="degree"
-                      value={degree}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => degreechange(e.target.value)}
-                      required
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-
-            <div className="row d-flex justify-content-center">
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Age"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="age"
-                      value={age}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => agechange(e.target.value)}
-               
-                    />
-                    <div>
-                      {age.length === 0 && validation && <span className="text-danger">Required</span>}
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-              <div className="col-5">
-                <div className="form-group mt-3 d-flex justify-content-center">
-                  <div>
-                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                      <InputLabel id="demo-select-small">
-                        Passed Out Year
-                      </InputLabel>
-                      <Select
-                        labelId="demo-select-small"
-                        id="demo-select-small"
-                        label="Passed Out Year"
+                      <TextField
+                        sx={{ width: 400 }}
+                        label="Employee Name"
+                        id="outlined-size-small"
+                        size="small"
                         className="email_login"
-                        name="passedoutyear"
-                        value={passedoutyear}
+                        type="text"
+                        name="name"
+                        value={name}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => passedoutyearchange(e.target.value)}
+                        onChange={e => namechange(e.target.value)}
                         required
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={2019}>2019</MenuItem>
-                        <MenuItem value={2020}>2020</MenuItem>
-                        <MenuItem value={2021}>2021</MenuItem>
-                        <MenuItem value={2022}>2022</MenuItem>
-                        <MenuItem value={2023}>2023</MenuItem>
-                      </Select>
-                    </FormControl>
+                      />
+                      <div className="d-flex">
+                        {name.length === 0 && validation && <span className="text-danger">Employee Name is required</span>}
+                      </div>
+                    </div>
                   </div>
+
                 </div>
-              </div>
-            </div>
-            <p className="textTwo d-flex justify-content-center mt-4 Animate_one">
-              EXPERIENCE
-            </p>
-            <div className="row d-flex justify-content-center">
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Company Name"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="companyname"
-                      value={companyname}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => companynamechange(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-5">
-                <div className="form-group mt-3 d-flex justify-content-center">
-                  <div>
-                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                      <InputLabel id="demo-select-small">
-                        No of Years Experience
-                      </InputLabel>
-                      <Select
-                        labelId="demo-select-small"
-                        id="demo-select-small"
-                        label="No of Years Experience"
-                        name="noofyearsexperience"
+                <div className="col-5">
+                  {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
+                  <div className="row ">
+                    <div class="mt-3">
+                      {/* <h4 class=" mt-2 ">Employee ID</h4> */}
+                      <TextField
+                        sx={{ width: 400 }}
+                        label="Employee ID"
+                        id="outlined-size-small"
+                        size="small"
                         className="email_login"
-                        value={noofyearsexperience}
+                        type="number"
+                        name="emppid"
+                        value={emppid}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => noofyearsexperiencechange(e.target.value)}
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={1}>1</MenuItem>
-                        <MenuItem value={2}>2</MenuItem>
-                        <MenuItem value={3}>3</MenuItem>
-                        <MenuItem value={4}>4</MenuItem>
-                        <MenuItem value={5}>5</MenuItem>
-                        <MenuItem value={6}>6</MenuItem>
-                        <MenuItem value={7}>7</MenuItem>
-                      </Select>
-                    </FormControl>
+                        onChange={e => emppidchange(e.target.value)}
+                        required
+                      />
+                      <div>
+                        {emppid.length === 0 && validation && <span className="text-danger">Employee ID is required</span>}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="row d-flex justify-content-center">
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Designation"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="designation"
-                      value={designation}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => designationchange(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col-5">
-                <div className="form-group mt-3 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Current CTC"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="currentctc"
-                      value={currentctc}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => currentctcchange(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row d-flex justify-content-center">
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="PF NO"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="pfno"
-                      value={pfno}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => pfnochange(e.target.value)}
-                  
-                    />
-                  
-                  </div>
-                </div>
 
-              </div>
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="ESI NO"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="esino"
-                      value={esino}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => esinochange(e.target.value)}
-                    
-                    />
-                  
-                  </div>
                 </div>
+              </div>
+              <div className="row d-flex justify-content-center">
+                <div className="col-5">
+                  {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
+                  <div className="row ">
+                    {/* <h4 class="  ">Reviewer Name</h4> */}
 
-              </div>
-            </div>
-            <p className="textTwo d-flex justify-content-center mt-4 Animate_one">
-              REFERRAL
-            </p>
-            <div className="row d-flex justify-content-center">
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Employee Id"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="empid"
-                      value={emppid}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => emppidchange(e.target.value)}
-                    />
+                    <div class="mt-4">
+                      <TextField
+                        sx={{ width: 400 }}
+                        label="Reviewer Name"
+                        id="outlined-size-small"
+                        size="small"
+                        className="email_login"
+                        type="text"
+                        name="reviewerName"
+                        value={reviewerName}
+                        onMouseDown={e => valchange(true)}
+                        onChange={e => reviewerNamechange(e.target.value)}
+                        required
+                      />
+                      <div>
+                        {reviewerName.length === 0 && validation && <span className="text-danger">Reviewer Name is required</span>}
+                      </div>
+                    </div>
                   </div>
+
                 </div>
-              </div>
-              <div className="col-5">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Name Of Employee"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="nameofemployee"
-                      value={nameofemployee}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => nameofemployeechange(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="row d-flex justify-content-center">
-              <div className="col-3 me-1">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Place"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login margin"
-                      type="text"
-                      name="place"
-                      value={place}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => placechange(e.target.value)}
-                      required
-                    />
-                    <div>
-                      {place.length === 0 && validation && <span className="text-danger">Required</span>}
+                <div className="col-5">
+                  {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
+                  <div className="row ">
+                    {/* <h4 class="mt-2  ">Review Period</h4> */}
+
+                    <div class="mt-4">
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer components={['DatePicker']}>
+        <DatePicker label="Basic date picker" 
+          value={reviewPeriod}
+          onMouseDown={e => valchange(true)}
+          onChange={e => reviewPeriodchange(e.target.value)}
+          required/>
+      </DemoContainer>
+    </LocalizationProvider>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <DemoContainer components={['DatePicker']}>
+        <DatePicker label="Basic date picker" 
+          value={reviewPeriodTwo}
+          onMouseDown={e => valchange(true)}
+          onChange={e => reviewPeriodtwochange(e.target.value)}
+          required/>
+      </DemoContainer>
+    </LocalizationProvider>
+
+                      <div>
+                        {reviewPeriod.length === 0 && validation && <span className="text-danger">Review Period is required</span>}
+                      </div>
                     </div>
                   </div>
                 </div>
-
               </div>
-              <div className="col-3 me-1 ms-2">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Date"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="date"
-                      value={date}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => datechange(e.target.value)}
-                      required
-                    />
+              <div className="mt-4 mx-5 p-1  heading ">
+                <h5 class="ms-2 pt-2">II. CORE VALUES AND OBJECTIVES</h5>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-5">
+                  <h5 class="my-3 c-blue">Performance Category</h5>
+                  <h6><b>Quality of Work:</b></h6>
+                  <p class="mt-2"><h6>Work is completed accurately (few
+                    or no errors), efficiently and within
+                    deadlines with minimal supervision</h6>
+                  </p>
+                </div>
+                <div className="col-5">
+                  <h5 className="text-center my-3 c-blue">Rating</h5>
+                  <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      {date.length === 0 && validation && <span className="text-danger">Required</span>}
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        <InputLabel id="demo-select-small">
+                          Graduate
+                        </InputLabel>
+                        <Select
+                          sx={{ width: 250 }}
+
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Graduate"
+                          className="email_login"
+                          name="passedoutyear"
+                          value={graduate}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => graduatechange(e.target.value)}
+                          required
+                        >
+                          <MenuItem value="">
+                          </MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
                     </div>
                   </div>
-                </div>
 
+                </div>
               </div>
-              <div className="col-3 ms-2">
-                <div className="form-group mt-4 d-flex justify-content-center">
-                  <div>
-                    <TextField
-                      label="Sign"
-                      id="outlined-size-small"
-                      size="small"
-                      className="email_login"
-                      type="text"
-                      name="sign"
-                      value={sign}
-                      onMouseDown={e => valchange(true)}
-                      onChange={e => signchange(e.target.value)}
-                      required
-                    />
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-5">
+                  <h6><b>Attendance & Punctuality:</b></h6>
+                  <p class="mt-2"><h6>Reports for work on time, provides
+                    advance notice of need for absence</h6>
+                  </p>
+                </div>
+                <div className="col-5">
+                  <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      {sign.length === 0 && validation && <span className="text-danger">Required</span>}
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        <InputLabel id="demo-select-small">
+                          Graduate
+                        </InputLabel>
+                        <Select
+                          sx={{ width: 250 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Graduate"
+                          className="email_login"
+                          name="passedoutyear"
+                          value={graduate}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => graduatechange(e.target.value)}
+                          required
+                        >
+                          <MenuItem value="">
+                          </MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
                     </div>
                   </div>
+
                 </div>
 
+
+
+
               </div>
-            </div>
-            <div className="btn_bg">
-              <div className=" pb-5 container">
-                <button className="btn btn-danger reset" type="reset">
-                  Reset
-                </button>
-                <input
-                  type="submit"
-                  className="btn btn-primary submit"
-                  value="Save"
-                ></input>
+              <div className="row d-flex justify-content-center">
+                <div className="col-5">
+                  <h6><b>Reliability/Dependability:</b></h6>
+                  <p class="mt-2"><h6>Consistently performs at a high
+                    level; manages time and workload
+                    effectively to meet responsibilities</h6>
+                  </p>
+                </div>
+                <div className="col-5">
+                  <div className="form-group mt-3 d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        <InputLabel id="demo-select-small">
+                          Graduate
+                        </InputLabel>
+                        <Select
+                          sx={{ width: 250 }}
+
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Graduate"
+                          className="email_login"
+                          name="passedoutyear"
+                          value={graduate}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => graduatechange(e.target.value)}
+                          required
+                        >
+                          <MenuItem value="">
+                          </MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+
               </div>
-            </div>
-          </form>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-5">
+                  <h6><b>Communication Skills:</b></h6>
+                  <p class="mt-2"><h6>Written and oral communications
+                    are clear, organized, and effective;
+                    listens and comprehends well </h6>
+                  </p>
+                </div>
+                <div className="col-5">
+                  <div className="form-group mt-3 d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        <InputLabel id="demo-select-small">
+                          Graduate
+                        </InputLabel>
+                        <Select
+                          sx={{ width: 250 }}
+
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Graduate"
+                          className="email_login"
+                          name="passedoutyear"
+                          value={graduate}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => graduatechange(e.target.value)}
+                          required
+                        >
+                          <MenuItem value="">
+                          </MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-5">
+                  <h6><b>Judgment & Decision-Making:</b></h6>
+                  <p class="mt-2"><h6>Makes thoughtful, well-reasoned
+                    decisions; exercises good judgment,
+                    resourcefulness, and creativity in
+                    problem-solving</h6>
+                  </p>
+                </div>
+                <div className="col-5">
+                  <div className="form-group mt-3 d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        <InputLabel id="demo-select-small">
+                          Graduate
+                        </InputLabel>
+                        <Select
+                          sx={{ width: 250 }}
+
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Graduate"
+                          className="email_login"
+                          name="passedoutyear"
+                          value={graduate}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => graduatechange(e.target.value)}
+                          required
+                        >
+                          <MenuItem value="">
+                          </MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-5">
+                  <h6><b>Initiative & Flexibility:</b></h6>
+                  <p class="mt-2"><h6>Demonstrates initiative, often
+                    seeking out additional responsibility;
+                    identifies problems and solutions;
+                    thrives on new challenges and
+                    adjusts to unexpected changes</h6>
+                  </p>
+                </div>
+                <div className="col-5">
+                  <div className="form-group mt-3 d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        <InputLabel id="demo-select-small">
+                          Graduate
+                        </InputLabel>
+                        <Select
+                          sx={{ width: 250 }}
+
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Graduate"
+                          className="email_login"
+                          name="passedoutyear"
+                          value={graduate}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => graduatechange(e.target.value)}
+                          required
+                        >
+                          <MenuItem value="">
+                          </MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-5">
+                  <h6><b>Cooperation & Teamwork:</b></h6>
+                  <p class="mt-2"><h6>Respectful of colleagues when working with others and makes valuable contributions to help the group achieve its goals</h6>
+                  </p>
+                </div>
+                <div className="col-5">
+                  <div className="form-group mt-3 d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        <InputLabel id="demo-select-small">
+                          Graduate
+                        </InputLabel>
+                        <Select
+                          sx={{ width: 250 }}
+
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Graduate"
+                          className="email_login"
+                          name="passedoutyear"
+                          value={graduate}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => graduatechange(e.target.value)}
+                          required
+                        >
+                          <MenuItem value="">
+                          </MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+
+              </div>
+              {/* <div className="mt-4">
+                   <h5>III. JOB-SPECIFIC PERFORMANCE CRITERIA</h5>
+            </div> */}
+
+              <div className="mt-4 mx-5 p-1  heading ">
+                <h5 class="ms-2 pt-2">III. JOB-SPECIFIC PERFORMANCE CRITERIA</h5>
+              </div>
+
+
+              <div className="row d-flex justify-content-center">
+
+                <div className="col-5">
+                  {/* <h5>Performance Category</h5> */}
+                  <h5 class="my-3 c-blue">Performance Category</h5>
+                  <h6><b>Knowledge of Position:</b></h6>
+                  <p class="mt-2"><h6>Possesses required skills,
+                    knowledge, and abilities to
+                    competently perform the job</h6>
+                  </p>
+                </div>
+                <div className="col-5">
+                  {/* <h5 class="my-3 c-blue">Performance Category</h5> */}
+                  <h5 className="text-center my-3 c-blue">Rating</h5>
+                  <div className="form-group mt-3 d-flex justify-content-center">
+
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        <InputLabel id="demo-select-small">
+                          Graduate
+                        </InputLabel>
+                        <Select
+                          sx={{ width: 250 }}
+
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Graduate"
+                          className="email_login"
+                          name="passedoutyear"
+                          value={graduate}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => graduatechange(e.target.value)}
+                          required
+                        >
+                          <MenuItem value="">
+                          </MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+
+              </div>
+              <div className="row d-flex justify-content-center">
+                <div className="col-5">
+                  <h6><b>Training & Development:</b></h6>
+                  <p class="mt-2"><h6>Continually seeks ways to
+                    strengthen performance and
+                    regularly monitors new
+                    developments in field of work</h6>
+                  </p>
+                </div>
+                <div className="col-5">
+                  <div className="form-group mt-3 d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        <InputLabel id="demo-select-small">
+                          Rating
+                        </InputLabel>
+                        <Select
+                          sx={{ width: 250 }}
+
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Graduate"
+                          className="email_login"
+                          name="passedoutyear"
+                          value={graduate}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => graduatechange(e.target.value)}
+                          required
+                        >
+                          <MenuItem value="">
+                          </MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+
+              </div>
+
+              <div className="mt-4 mx-5 p-1  heading ">
+                <h5 class="ms-2 pt-2">IV. OVERALL RATING</h5>
+              </div>
+
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-11">
+                  <div class=" row my-3 ms-5"><div class="col-3"><b>(A) EXCEEDS EXPECTATIONS</b></div><div class="col-9">(Employee consistently performs at a high level that exceeds expectations)</div></div>
+                  <div class="row my-3 mt-2 ms-5"><div div class="col-3"><b>(B) MEETS EXPECTATIONS</b></div><div class="col-9">(Employee satisfies all essential job requirements;may exceed expectations periodically; demonstrates likelihood of eventually exceeding expectations)</div></div>
+                  <div class="row my-3 ms-5"><div div class="col-3"><b>(C) NEEDS EXPECTATIONS</b> </div><div class="col-9">(Employee consistently performs below required standards/expectations for the position; training or other action is necessary to correct performance)</div></div>
+                  <div class="row my-3 ms-5"><div div class="col-3"><b>(D) UNACCEPTABLE </b></div><div class="col-9">(Employee is unable or unwilling to perform required duties according to company standards;immediate improvement must be demonstrated)</div></div>
+                </div>
+              </div>
+
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-5">
+                </div>
+                <div className="col-5">
+                  <div className="form-group mt-3 d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        <InputLabel id="demo-select-small">
+                          Your Rating
+                        </InputLabel>
+                        <Select
+                          sx={{ width: 250 }}
+
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Graduate"
+                          className="email_login"
+                          name="passedoutyear"
+                          value={graduate}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => graduatechange(e.target.value)}
+                          required
+                        >
+                          <MenuItem value="">
+                          </MenuItem>
+                          <MenuItem value="Exceeds expectations"><b>(A)</b>Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations"><b>(B)</b>Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement"><b>(C)</b>Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable"><b>(D)</b>Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="mb-3  mx-5 ">
+                <label for="exampleFormControlTextarea1" class="form-label"><h5>Comment on the employee's overall performance:</h5></label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+
+              <div className="mt-4 mx-5 p-1 heading">
+                <h5>V. REVIEWER COMMENTS(optional)</h5>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+
+              <div className="mt-4 mx-5 p-1 heading ">
+                <h5 >VI. ACKNOWLEDGEMENT</h5>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              </div>
+
+
+
+
+
+
+
+
+
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3 me-1">
+                  <div className="form-group mt-4 d-flex justify-content-center">
+                    <div>
+                      <TextField
+                        label="Place"
+                        id="outlined-size-small"
+                        size="small"
+                        className="email_login margin"
+                        type="text"
+                        name="place"
+                        value={place}
+                        onMouseDown={e => valchange(true)}
+                        onChange={e => placechange(e.target.value)}
+                        required
+                      />
+                      <div>
+                        {place.length === 0 && validation && <span className="text-danger">Required</span>}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div className="col-3 me-1 ms-2">
+                  <div className="form-group mt-4 d-flex justify-content-center">
+                    <div>
+                      <TextField
+                        label="Date"
+                        id="outlined-size-small"
+                        size="small"
+                        className="email_login"
+                        type="text"
+                        name="date"
+                        value={date}
+                        onMouseDown={e => valchange(true)}
+                        onChange={e => datechange(e.target.value)}
+                        required
+                      />
+                      <div>
+                        {date.length === 0 && validation && <span className="text-danger">Required</span>}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div className="col-3 ms-2">
+                  <div className="form-group mt-4 d-flex justify-content-center">
+                    <div>
+                      <TextField
+                        label="Sign"
+                        id="outlined-size-small"
+                        size="small"
+                        className="email_login"
+                        type="text"
+                        name="sign"
+                        value={sign}
+                        onMouseDown={e => valchange(true)}
+                        onChange={e => signchange(e.target.value)}
+                        required
+                      />
+                      <div>
+                        {sign.length === 0 && validation && <span className="text-danger">Required</span>}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div className="btn_bg">
+                <div className=" pb-5 container">
+                  <button className="btn btn-danger reset" type="reset">
+                    Reset
+                  </button>
+                  <input
+                    type="submit"
+                    className="btn btn-primary submit"
+                    value="Save"
+                  ></input>
+                </div>
+              </div>
+            </form>
+          </div>
+
         </div>
-        <div className="col-2"></div>
       </div>
-    </div>
     </div>
   );
 };
 
 export default EmpCreate;
+
+
+
+

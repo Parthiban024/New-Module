@@ -404,3 +404,16 @@ padding-top: 30px;
 padding-bottom: 20px;
 box-shadow: 0px 0px 50px 1px whitesmoke !important;
 }
+/* kalai */
+.heading{
+  background-color: #222;
+  color: #fff;
+  border-radius: 4px;
+  /* padding-top: 5px; */
+  }
+  .lsize{
+    font-size:25px;
+    margin-right: 20px;
+  }
+  .c-blue{
+    color:mediumblue;}

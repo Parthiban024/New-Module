@@ -53,7 +53,10 @@
     "web-vitals": "^2.1.4",
     "xlsx": "^0.18.5",
     "yup": "^0.32.11",
-    "zlib": "^1.0.5"
+    "zlib": "^1.0.5",
+    "@mui/x-date-pickers": "latest",
+    "date-fns": "latest",
+    "dayjs": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
