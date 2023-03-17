@@ -55,7 +55,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "homepage": "https://Parthiban024.github.io/New-Module/",
+    "homepage": "https://Parthiban024.github.io/New-Module",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
  
