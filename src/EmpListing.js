@@ -18,7 +18,7 @@ const EmpListing = () => {
   }
   const Removefunction = (id) => {
     if (window.confirm('Do you want to remote')) {
-      fetch("http://localhost:8000/employee/" + id, {
+      fetch("https://my-server.vercel.app/employee/" + id, {
         method: "DELETE",
       }).then((res) => {
         Swal.fire(
@@ -35,7 +35,7 @@ const EmpListing = () => {
     navigate();
   }
   useEffect(() => {
-    fetch("http://localhost:8000/employee").then((res) => {
+    fetch("https://my-server.vercel.app/employee").then((res) => {
       return res.json();
     }).then((resp) => {
       empdatachange(resp);
