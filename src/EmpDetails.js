@@ -34,7 +34,9 @@ const EmpDetails = () => {
     doc.text(`Graduate: ${empdata.graduate}`, 10, 120);
     doc.text(`Passed Out Year: ${empdata.passedoutyear}`, 10, 130);
     doc.text(`Skills: ${empdata.skills}`, 10, 140);
+    doc.text(`Skills: ${empdata.isChecked}`, 10, 140);
     doc.save(`Employee_${empdata.id}.pdf`);
+    
   }
   return (
     <div className='row'>
@@ -75,6 +77,7 @@ const EmpDetails = () => {
      <h5 className='ps-5'>PLACE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {empdata.place}</h5><br></br>
      <h5 className='ps-5'>DATE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {empdata.date}</h5><br></br>
      <h5 className='ps-5'>SIGN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {empdata.sign}</h5>
+     <h5 className='ps-5'>SIGN &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {empdata.isChecked}</h5>
      <div className='text-center'>
      <Link className='btn btn-primary popup_btn mt-2 mb-3 ' to='/emplist'>Back to Listing</Link>
      <button className='btn btn-primary' onClick={handleDownload}>Download</button>

@@ -90,6 +90,8 @@ const EmpEdit = () => {
   const [date, datechange] =useState("");
   const [sign, signchange] =useState("");
   const [validation, valchange] =useState("");
+
+
 const handleSubmit =(e)=> {
 e.preventDefault();
 const empdata={name,lastname,email,birthday,gender,bloodgroup,panno,aadharno,personalcontactno,emergencycontactno,presentaddress,permanentaddress,graduate,passedoutyear,degree,age,companyname,noofyearsexperience,designation,currentctc,pfno,esino,emppid,nameofemployee,place,date,sign};
@@ -160,6 +162,7 @@ navigate('/emplist');
               <div className="col-5">
                 <div className="form-group mt-4 d-flex justify-content-center">
                   <div>
+        
                     <TextField
                       label="Last Name"
                       id="outlined-size-small"

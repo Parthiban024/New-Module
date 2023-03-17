@@ -58,12 +58,15 @@ const EmpCreate = () => {
   const [date, datechange] = useState("");
   const [sign, signchange] = useState("");
   const [validation, valchange] = useState("");
+ 
+
 
   const handleSubmit = (e) => {
 
 
+    
     e.preventDefault();
-    const empdata = { name, lastname, email, birthday, gender, bloodgroup, panno, aadharno, personalcontactno, emergencycontactno, presentaddress, permanentaddress, graduate, passedoutyear, degree, age, companyname, noofyearsexperience, designation, currentctc,pfno,esino, emppid, nameofemployee, place, date, sign };
+    const empdata = { name, lastname, email,birthday, gender, bloodgroup, panno, aadharno, personalcontactno, emergencycontactno, presentaddress, permanentaddress, graduate, passedoutyear, degree, age, companyname, noofyearsexperience, designation, currentctc,pfno,esino, emppid, nameofemployee, place, date, sign };
 
 //  
     
@@ -90,18 +93,9 @@ const EmpCreate = () => {
     <div className="container-fluid mt-5 bg">
       <div className="row">
         <div className="col-3 ms-5"></div>
-        {/* <div className="col-3 setOne wholeRow">
-          <div className="d-flex justify-content-center pt-3">
-            <img className="obw_logo Animate_2" src={Objectways} alt="Objectways" />
-          </div>
-          <div className="d-flex justify-content-center">
-            <img className="obw_logo_two Animate_2" src={Form_Inout} alt="Form_Inout" />
-          </div>
-        </div> */}
-
-        <div className="col-5 setTwo wholerow" >
+<div className="col-5 setTwo wholerow" >
           <p className="textOne d-flex justify-content-center app mt-2 emp_list_head ">
-          Annual Appraisal Form
+          ANNUAL APPRAISAL FORM
 
           </p>
           <div className="form-group">
@@ -134,6 +128,7 @@ const EmpCreate = () => {
               </div>
               <div className="col-5">
                 <div className="form-group mt-4 d-flex justify-content-center">
+     
                   <div>
                     <TextField
                       label="Employee ID"
