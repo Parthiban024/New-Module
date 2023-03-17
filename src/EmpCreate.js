@@ -89,19 +89,20 @@ const EmpCreate = () => {
     <div className="font_family">
     <div className="container-fluid mt-5 bg">
       <div className="row">
-        <div className="col-2"></div>
-        <div className="col-3 setOne wholeRow">
+        <div className="col-3 ms-5"></div>
+        {/* <div className="col-3 setOne wholeRow">
           <div className="d-flex justify-content-center pt-3">
             <img className="obw_logo Animate_2" src={Objectways} alt="Objectways" />
           </div>
           <div className="d-flex justify-content-center">
             <img className="obw_logo_two Animate_2" src={Form_Inout} alt="Form_Inout" />
           </div>
-        </div>
+        </div> */}
 
         <div className="col-5 setTwo wholerow" >
-          <p className="textOne d-flex justify-content-center app mt-2 emp_list_head Animate_one">
-            APPLICATION FORM
+          <p className="textOne d-flex justify-content-center app mt-2 emp_list_head ">
+          Annual Appraisal Form
+
           </p>
           <div className="form-group">
             <label className="id_display">ID</label>
@@ -113,7 +114,7 @@ const EmpCreate = () => {
                 <div className="form-group mt-4 d-flex justify-content-center">
                   <div>
                     <TextField
-                      label="First Name"
+                      label="Employee Name"
                       id="outlined-size-small"
                       size="small"
                       className="email_login"
@@ -135,7 +136,7 @@ const EmpCreate = () => {
                 <div className="form-group mt-4 d-flex justify-content-center">
                   <div>
                     <TextField
-                      label="Last Name"
+                      label="Employee ID"
                       id="outlined-size-small"
                       size="small"
                       className="email_login"
@@ -159,7 +160,7 @@ const EmpCreate = () => {
                 <div className="form-group mt-4 d-flex justify-content-center">
                   <div>
                     <TextField
-                      label="Email"
+                      label="Reviewer Name"
                       id="outlined-size-small"
                       size="small"
                       className="email_login"
