@@ -623,7 +623,7 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                          Rating
+                          Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
@@ -679,7 +679,7 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                          Your Rating
+                          Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
@@ -764,7 +764,7 @@ const EmpCreate = () => {
                   <div className="form-group mt-4 d-flex justify-content-center">
                     <div>
                       <TextField
-                        label="Date"
+                        
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
