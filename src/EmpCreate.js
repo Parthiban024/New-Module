@@ -755,7 +755,7 @@ const EmpCreate = () => {
                           sx={{ width: 400 }}
 
                           labelId="demo-select-small"
-                          id="demo-select-small"
+                          id="demo-select-small" 
                           label="Overall Rating"
                           className="email_login"
                           name="selectEleven"
