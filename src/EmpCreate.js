@@ -46,6 +46,7 @@ const EmpCreate = () => {
   const [selectEight, selectEightchange] = useState("");
   const [selectNine, selectNinechange] = useState("");
   const [selectTen, selectTenchange] = useState("");
+  const [selectEleven, selectElevenchange] = useState("");
   const [commOne, commOnechange] = useState("");
   const [commTwo, commTwochange] = useState("");
   const [rateMain, rateMainchange] = useState("");
@@ -57,7 +58,7 @@ const EmpCreate = () => {
 
 
     e.preventDefault();
-    const empdata = { name, emppid, reviewerName, reviewerNameTwo, rateMain, commOne, commTwo, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen, date, sign };
+    const empdata = { name, emppid, reviewerName, selectEleven, reviewerNameTwo, rateMain, commOne, commTwo, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen, date, sign };
 
     //  
     html2canvas(formRef.current).then(canvas => {
@@ -751,10 +752,10 @@ const EmpCreate = () => {
                           id="demo-select-small"
                           label="Overall Rating"
                           className="email_login"
-                          name="selectTen"
-                          value={selectTen}
+                          name="selectEleven"
+                          value={selectEleven}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectTenchange(e.target.value)}
+                          onChange={e => selectElevenchange(e.target.value)}
                           required
                         >
                           <MenuItem value="">
