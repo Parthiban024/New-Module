@@ -364,7 +364,7 @@ width: 300px;
   color: #288bdb;
 }
 .top_nav{
-  background-color: #f1dee2;
+  background-color: #F1EDF7;
 
   margin-left: -12px;
   margin-right: -12px;
@@ -376,12 +376,13 @@ width: 300px;
   margin-right: -12px;
 }
 .thead_bg{
-  background-color: #d9cce0 !important;  
+  background-color: #46227f !important;  
   border: 0.5px solid gray;
   border-radius: 20px !important;
+  color: white !important;
 }
 .thead_bg>tr{
-  color: black !important;
+  color: white !important;
   font-weight: 500;
 }
 .thead_white{

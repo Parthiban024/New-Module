@@ -112,21 +112,11 @@ navigate('/emplist');
     <div className="font_family">
     <div className="container px-5 mt-5 bg">
       <div className="row">
-
-        {/* <div className="col-3 setOne wholeRow">
-        <div className="d-flex justify-content-center pt-3">
-          <img className="obw_logo Animate_2" src={Objectways} alt="Objectways" />
-        </div>
-        <div className="d-flex justify-content-center">
-          <img className="obw_logo_two Animate_2" src={Form_Inout} alt="Form_Inout" />
-        </div>
-      </div> */}
-
-        <div className="col  setTwo wholerow " >
+<div className="col  setTwo wholerow " >
           <div className="d-flex justify-content-center">
         <img src={Objectways} alt="Logo" className='logo_details mt-3 ' />
         </div>
-          <h3 className="textOne d-flex justify-content-center app mt-4 emp_list_head ">
+          <h3 className="textOne d-flex justify-content-center app mt-4 emp_list_head b-heading">
             ANNUAL APPRAISAL FORM
 
           </h3>
@@ -888,7 +878,6 @@ navigate('/emplist');
       </div>
     </div>
   </div>
-
   )
 }
 

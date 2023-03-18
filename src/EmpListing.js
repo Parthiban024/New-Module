@@ -51,7 +51,7 @@ const EmpListing = () => {
           <div className=' d-flex justify-content-center'>
               <img src={Objectways} alt="Logo" className='logo_details mt-3' />
             </div>
-            <h2 className="text-center pt-4 emp_list_head">EMPLOYEE'S LIST</h2>
+            <h2 className="text-center pt-4 emp_list_head b-heading">EMPLOYEE'S LIST</h2>
           <div className="divbtn">
             <Link to="/login" className="btn btn-success mb-3">Logout</Link>
           </div>

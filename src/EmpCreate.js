@@ -40,7 +40,6 @@ const EmpCreate = () => {
   const [reviewerNameTwo, reviewerNameTwochange] = useState("");
   const [reviewPeriod, reviewPeriodchange] = useState("");
   const [reviewPeriodTwo, reviewPeriodtwochange] = useState("");
- 
   const [selectOne, selectOnechange] = useState("");
   const [selectTwo, selectTwochange] = useState("");
   const [selectThree, selectThreechange] = useState("");
@@ -53,7 +52,6 @@ const EmpCreate = () => {
   const [selectTen, selectTenchange] = useState("");
   const [commOne, commOnechange] = useState("");
   const [commTwo, commTwochange] = useState("");
-  
   const [rateMain, rateMainchange] = useState("");
   const [date, datechange] = useState("");
   const [sign, signchange] = useState("");
@@ -89,17 +87,7 @@ const EmpCreate = () => {
     <div className="font_family">
       <div className="container px-5 mt-5 bg">
         <div className="row">
-
-          {/* <div className="col-3 setOne wholeRow">
-          <div className="d-flex justify-content-center pt-3">
-            <img className="obw_logo Animate_2" src={Objectways} alt="Objectways" />
-          </div>
-          <div className="d-flex justify-content-center">
-            <img className="obw_logo_two Animate_2" src={Form_Inout} alt="Form_Inout" />
-          </div>
-        </div> */}
-
-          <div className="col  setTwo wholerow " >
+<div className="col  setTwo wholerow " >
             <div className="d-flex justify-content-center">
           <img src={Objectways} alt="Logo" className='logo_details mt-3 ' />
           </div>
@@ -215,7 +203,7 @@ const EmpCreate = () => {
                         required
                       />
                       <div>
-                        {date.length === 0 && validation && <span className="text-danger">Start date is Required</span>}
+                        {reviewPeriod.length === 0 && validation && <span className="text-danger">Start date is Required</span>}
                       </div>
                     </div>
                     <div class="ms-2">
@@ -233,7 +221,7 @@ const EmpCreate = () => {
                         required
                       />
                       <div>
-                        {date.length === 0 && validation && <span className="text-danger">End Date is Required</span>}
+                        {reviewPeriodTwo.length === 0 && validation && <span className="text-danger">End Date is Required</span>}
                       </div>
                     </div>
                   </div>
