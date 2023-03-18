@@ -745,7 +745,7 @@ const EmpCreate = () => {
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-5">
-                  <div className="form-group mt-3 d-flex">
+                  <div className="form-group mt-4 d-flex">
                     <div>
                       <FormControl size="small">
                         <InputLabel id="demo-select-small">
