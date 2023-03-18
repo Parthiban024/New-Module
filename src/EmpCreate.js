@@ -71,7 +71,7 @@ const EmpCreate = () => {
       pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
 
       // Download the PDF document
-      pdf.save(`${empdata.name}.pdf`);
+      pdf.save(`${empdata.name}.${empdata.emppid}.pdf`);
     });
     // fetch("http://localhost:8000/employee", {
     //   method: "POST",
@@ -738,30 +738,38 @@ const EmpCreate = () => {
               </div>
               <div className="row d-flex justify-content-center">
               <div className="col-5">
-                  {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
-                  <div className="row ">
-                    <div class="mt-3 ">
-                      {/* <h4 class=" mt-2 ">Overall Rating (Out of 5)</h4> */}
-                      <TextField
-                        sx={{ width: 400 }}
-                        label="Overall Rating (Out of 5)"
-                        id="outlined-size-small"
-                        size="small"
-                        className="email_login"
-                        type="number"
-                        name="rateMain"
-                        value={rateMain}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => rateMainchange(e.target.value)}
-                        required
-                      />
-                      <div>
-                        {emppid.length === 0 && validation && <span className="text-danger">Overall Rating is required</span>}
-                      </div>
+                  <div className="form-group mt-3 d-flex">
+                    <div>
+                      <FormControl  size="small">
+                        <InputLabel id="demo-select-small">
+                          Overall Rating
+                        </InputLabel>
+                        <Select
+                          sx={{ width: 400 }}
+
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          label="Overall Rating"
+                          className="email_login"
+                          name="selectTen"
+                          value={selectTen}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectTenchange(e.target.value)}
+                          required
+                        >
+                          <MenuItem value="">
+                          </MenuItem>
+                          <MenuItem value="Exceeds expectations"><b>(A)</b></MenuItem>
+                          <MenuItem value="Meets expectations"><b>(B)</b></MenuItem>
+                          <MenuItem value="Needs improvement"><b>(C)</b></MenuItem>
+                          <MenuItem value="Unacceptable"><b>(D)</b></MenuItem>
+                        </Select>
+                      </FormControl>
                     </div>
                   </div>
 
                 </div>
+        
       {/* date */}
       <div className="col-5">
                   <div className="form-group mt-4 d-flex justify-content-center">
