@@ -37,8 +37,10 @@ const EmpCreate = () => {
   const [name, namechange] = useState("");
   const [emppid, emppidchange] = useState("");
   const [reviewerName, reviewerNamechange] = useState("");
+  const [reviewerNameTwo, reviewerNameTwochange] = useState("");
   const [reviewPeriod, reviewPeriodchange] = useState("");
   const [reviewPeriodTwo, reviewPeriodtwochange] = useState("");
+ 
   const [selectOne, selectOnechange] = useState("");
   const [selectTwo, selectTwochange] = useState("");
   const [selectThree, selectThreechange] = useState("");
@@ -51,8 +53,8 @@ const EmpCreate = () => {
   const [selectTen, selectTenchange] = useState("");
   const [commOne, commOnechange] = useState("");
   const [commTwo, commTwochange] = useState("");
-  const [commThree, commThreechange] = useState("");
-  const [place, placechange] = useState("");
+  
+  const [rateMain, rateMainchange] = useState("");
   const [date, datechange] = useState("");
   const [sign, signchange] = useState("");
   const [validation, valchange] = useState("");
@@ -61,7 +63,7 @@ const EmpCreate = () => {
 
 
     e.preventDefault();
-    const empdata = { name, emppid, reviewerName,commOne, commTwo,commThree, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen, place, date, sign };
+    const empdata = { name, emppid, reviewerName, reviewerNameTwo, rateMain, commOne, commTwo, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen, date, sign };
 
     //  
 
@@ -101,7 +103,7 @@ const EmpCreate = () => {
             <div className="d-flex justify-content-center">
           <img src={Objectways} alt="Logo" className='logo_details mt-3 ' />
           </div>
-            <h3 className="textOne d-flex justify-content-center app mt-4 emp_list_head ">
+            <h3 className="textOne d-flex justify-content-center app mt-4 emp_list_head b-heading">
               ANNUAL APPRAISAL FORM
 
             </h3>
@@ -111,8 +113,8 @@ const EmpCreate = () => {
               <input value={id} disabled="disabled" className="form-control id_display"></input>
             </div>
             <form autoComplete="off" className="scroll-to" onSubmit={handleSubmit} id="scrollable-div">
-              <div className="mt-4 mx-5 p-1 heading ">
-                <h5 class="ms-2 pt-2 " >I. EMPLOYEE INFORMATION</h5>
+              <div className="mt-4 mx-5 heading ">
+                <h5 class="ms-2 p-1 " >I. EMPLOYEE INFORMATION</h5>
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-5">
@@ -197,44 +199,56 @@ const EmpCreate = () => {
 
                 </div>
                 <div className="col-5">
-                  {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
-                  <div className="row ">
-                    {/* <h4 class="mt-2  ">Review Period</h4> */}
-
-                    <div class="mt-4">
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DatePicker']}>
-        <DatePicker label="Basic date picker" 
-          value={reviewPeriod}
-          onMouseDown={e => valchange(true)}
-          onChange={e => reviewPeriodchange(e.target.value)}
-          required/>
-      </DemoContainer>
-    </LocalizationProvider>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DatePicker']}>
-        <DatePicker label="Basic date picker" 
-          value={reviewPeriodTwo}
-          onMouseDown={e => valchange(true)}
-          onChange={e => reviewPeriodtwochange(e.target.value)}
-          required/>
-      </DemoContainer>
-    </LocalizationProvider>
-
+                  <div className="form-group mt-4 d-flex justify-content-start">
+                    <div>
+                      <TextField
+                        // label="Date"
+                        sx={{ width: 200 }}
+                        id="outlined-size-small"
+                        size="small"
+                        className="email_login"
+                        type="date"
+                        name="reviewPeriod"
+                        value={reviewPeriod}
+                        onMouseDown={e => valchange(true)}
+                        onChange={e => reviewPeriodchange(e.target.value)}
+                        required
+                      />
                       <div>
-                        {reviewPeriod.length === 0 && validation && <span className="text-danger">Review Period is required</span>}
+                        {date.length === 0 && validation && <span className="text-danger">Start date is Required</span>}
+                      </div>
+                    </div>
+                    <div class="ms-2">
+                      <TextField
+                        // label="Date"
+                        sx={{ width: 200 }}
+                        id="outlined-size-small"
+                        size="small"
+                        className="email_login"
+                        type="date"
+                        name="reviewPeriodTwo"
+                        value={reviewPeriodTwo}
+                        onMouseDown={e => valchange(true)}
+                        onChange={e => reviewPeriodtwochange(e.target.value)}
+                        required
+                      />
+                      <div>
+                        {date.length === 0 && validation && <span className="text-danger">End Date is Required</span>}
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
-              <div className="mt-4 mx-5 p-1  heading ">
-                <h5 class="ms-2 pt-2">II. CORE VALUES AND OBJECTIVES</h5>
+
+
+              <div className="mt-4 mx-5  heading ">
+                <h5 class="ms-2 p-1">II. CORE VALUES AND OBJECTIVES</h5>
               </div>
 
               <div className="row d-flex justify-content-center">
                 <div className="col-5">
-                  <h5 class="my-3 c-blue">Performance Category</h5>
+                  <h5 class="my-3 c-blue"><b>PERFORMANCE CATEGORY</b></h5>
                   <h6><b>Quality of Work:</b></h6>
                   <p class="mt-2"><h6>Work is completed accurately (few
                     or no errors), efficiently and within
@@ -242,7 +256,7 @@ const EmpCreate = () => {
                   </p>
                 </div>
                 <div className="col-5">
-                  <h5 className="text-center my-3 c-blue">Rating</h5>
+                  <h5 className="text-center my-3 c-blue"><b>RATING</b></h5>
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
@@ -553,8 +567,8 @@ const EmpCreate = () => {
                    <h5>III. JOB-SPECIFIC PERFORMANCE CRITERIA</h5>
             </div> */}
 
-              <div className="mt-4 mx-5 p-1  heading ">
-                <h5 class="ms-2 pt-2">III. JOB-SPECIFIC PERFORMANCE CRITERIA</h5>
+              <div className="mt-4 mx-5 heading ">
+                <h5 class="ms-2 p-1">III. JOB-SPECIFIC PERFORMANCE CRITERIA</h5>
               </div>
 
 
@@ -562,7 +576,7 @@ const EmpCreate = () => {
 
                 <div className="col-5">
                   {/* <h5>Performance Category</h5> */}
-                  <h5 class="my-3 c-blue">Performance Category</h5>
+                  <h5 class="my-3 c-blue"><b>PERFORMANCE CATEGORY</b></h5>
                   <h6><b>Knowledge of Position:</b></h6>
                   <p class="mt-2"><h6>Possesses required skills,
                     knowledge, and abilities to
@@ -571,7 +585,7 @@ const EmpCreate = () => {
                 </div>
                 <div className="col-5">
                   {/* <h5 class="my-3 c-blue">Performance Category</h5> */}
-                  <h5 className="text-center my-3 c-blue">Rating</h5>
+                  <h5 className="text-center my-3 c-blue"><b>RATING</b></h5>
                   <div className="form-group mt-3 d-flex justify-content-center">
 
                     <div>
@@ -656,8 +670,8 @@ const EmpCreate = () => {
 
               </div>
 
-              <div className="mt-4 mx-5 p-1  heading ">
-                <h5 class="ms-2 pt-2">IV. OVERALL RATING</h5>
+              <div className="mt-4 mx-5 heading ">
+                <h5 class="ms-2 p-1 ">IV. OVERALL RATING</h5>
               </div>
 
 
@@ -718,53 +732,54 @@ const EmpCreate = () => {
                   ></textarea>
               </div>
 
-              <div className="mt-4 mx-5 p-1 heading">
-                <h5>V. REVIEWER COMMENTS(optional)</h5>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+              <div className="mt-5 mx-5  heading">
+                <h5 class="ms-2   p-1">V. REVIEWER COMMENTS (optional)</h5>
+                </div>
+                <div class="mx-5 mt-3">
+                <textarea class="form-control  " id="exampleFormControlTextarea1" rows="3"
                  name="commTwo"
                  value={commTwo}
                  onMouseDown={e => valchange(true)}
                  onChange={e => commTwochange(e.target.value)}
-                 ></textarea>
-              </div>
+                 ></textarea></div>
+              {/* </div> */}
 
-              <div className="mt-4 mx-5 p-1 heading ">
-                <h5 >VI. ACKNOWLEDGEMENT</h5>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                name="commThree"
-                value={commThree}
-                onMouseDown={e => valchange(true)}
-                onChange={e => commThreechange(e.target.value)}
-                ></textarea>
+              <div className="mt-5 mx-5 heading ">
+                <h5 class="ms-2 p-1 " >VI. ACKNOWLEDGEMENT</h5>
               </div>
-             <div className="row d-flex justify-content-center">
-                <div className="col-3 me-1">
-                  <div className="form-group mt-4 d-flex justify-content-center">
-                    <div>
+              <div className="row d-flex justify-content-center">
+              <div className="col-5">
+                  {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
+                  <div className="row ">
+                    <div class="mt-3 ">
+                      {/* <h4 class=" mt-2 ">Overall Rating (Out of 5)</h4> */}
                       <TextField
-                        label="Place"
+                        sx={{ width: 400 }}
+                        label="Overall Rating (Out of 5)"
                         id="outlined-size-small"
                         size="small"
-                        className="email_login margin"
-                        type="text"
-                        name="place"
-                        value={place}
+                        className="email_login"
+                        type="number"
+                        name="rateMain"
+                        value={rateMain}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => placechange(e.target.value)}
+                        onChange={e => rateMainchange(e.target.value)}
                         required
                       />
                       <div>
-                        {place.length === 0 && validation && <span className="text-danger">Required</span>}
+                        {emppid.length === 0 && validation && <span className="text-danger">Overall Rating is required</span>}
                       </div>
                     </div>
                   </div>
 
                 </div>
-                <div className="col-3 me-1 ms-2">
+      {/* date */}
+      <div className="col-5">
                   <div className="form-group mt-4 d-flex justify-content-center">
                     <div>
                       <TextField
-                        
+                      sx={{ width: 400 }}
+                        // label="Date"
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
@@ -776,17 +791,46 @@ const EmpCreate = () => {
                         required
                       />
                       <div>
-                        {date.length === 0 && validation && <span className="text-danger">Required</span>}
+                        {date.length === 0 && validation && <span className="text-danger">Date is Required</span>}
                       </div>
                     </div>
                   </div>
 
                 </div>
-                <div className="col-3 ms-2">
+              </div>
+              <div className="row d-flex justify-content-center">
+                <div className="col-5">
+                  {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
+                  <div className="row ">
+                    {/* <h4 class="  ">Reviewer Name</h4> */}
+
+                    <div class="mt-4">
+                      <TextField
+                        sx={{ width: 400 }}
+                        label="Reviewer Name"
+                        id="outlined-size-small"
+                        size="small"
+                        className="email_login"
+                        type="text"
+                        name="reviewerNameTwo"
+                        value={reviewerNameTwo}
+                        onMouseDown={e => valchange(true)}
+                        onChange={e => reviewerNameTwochange(e.target.value)}
+                        required
+                      />
+                      <div>
+                        {reviewerName.length === 0 && validation && <span className="text-danger">Reviewer Name is required</span>}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div className="col-5">
                   <div className="form-group mt-4 d-flex justify-content-center">
                     <div>
                       <TextField
-                        label="Sign"
+                        label="Reviewer Signature"
+                        sx={{ width: 400 }}
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
@@ -798,12 +842,13 @@ const EmpCreate = () => {
                         required
                       />
                       <div>
-                        {sign.length === 0 && validation && <span className="text-danger">Required</span>}
+                        {/* {sign.length === 0 && validation && <span className="text-danger">Required</span>} */}
                       </div>
                     </div>
                   </div>
 
                 </div>
+              
               </div>
               <div className="btn_bg">
                 <div className=" pb-5 container d-flex justify-content-center">

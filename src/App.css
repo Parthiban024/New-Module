@@ -16,7 +16,7 @@ body{
 
 .setTwo{
   /* height: 620px; */
-  background-color: #f1dee2;
+  background-color: #F1EDF7;
 }
 .wholeRow{
   border-radius: 5px 0px 0px 5px !important;
@@ -155,7 +155,7 @@ background-color: #f2eef4;
 }
 .submit{
   margin-top: 6px;
-  background-color: #4677ff !important;
+  background-color: #46227f !important;
   color: #fff !important;
   font-size: 20px !important;
   padding-top: 3px !important;
@@ -407,7 +407,7 @@ box-shadow: 0px 0px 50px 1px whitesmoke !important;
 }
 /* kalai */
 .heading{
-  background-color: #222;
+  background-color: #46227f;
   color: #fff;
   border-radius: 4px;
   /* padding-top: 5px; */
@@ -416,5 +416,12 @@ box-shadow: 0px 0px 50px 1px whitesmoke !important;
     font-size:25px;
     margin-right: 20px;
   }
-  .c-blue{
-    color:mediumblue;}
+ 
+    .c-blue{
+      color:#46227f;
+    }
+    .b-heading{
+      color:#46227f;
+      font-weight: 600 !important;
+    }
+   

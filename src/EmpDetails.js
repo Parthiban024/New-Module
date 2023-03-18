@@ -36,12 +36,12 @@ const EmpDetails = () => {
     doc.text(`Passed Out Year: ${empdata.selectEight}`, 10, 130);
     doc.text(`Skills: ${empdata.selectNine}`, 10, 140);
     doc.text(`Skills: ${empdata.selectTen}`, 10, 150);
-    doc.text(`Skills: ${empdata.commOne}`, 10, 150);
-    doc.text(`Skills: ${empdata.commTwo}`, 10, 150);
-    doc.text(`Skills: ${empdata.commThree}`, 10, 150);
-    doc.text(`Place: ${empdata.place}`, 10, 160);
-    doc.text(`Date: ${empdata.date}`, 10, 170);
-    doc.text(`Sign: ${empdata.sign}`, 10, 180);
+    doc.text(`Comments One: ${empdata.commOne}`, 10, 160);
+    doc.text(`Comments Two: ${empdata.commTwo}`, 10, 170);
+    doc.text(`Your Rating: ${empdata.rateMain}`, 10, 180);
+    doc.text(`Reviewer Name: ${empdata.reviewerNameTwo}`, 10, 190);
+    doc.text(`Date: ${empdata.date}`, 10, 200);
+    doc.text(`Sign: ${empdata.sign}`, 10, 210);
     doc.save(`Employee_${empdata.id}.pdf`);
 
   }
@@ -54,7 +54,7 @@ const EmpDetails = () => {
             <div className='mt-4 '>
               <img src={Objectways} alt="Logo" className='logo_details' />
             </div>
-            <h3 className='emp_list_head mt-3'>ANNUAL APPRAISAL FORM DETAILS</h3>
+            <h3 className='emp_list_head mt-3 b-heading'>ANNUAL APPRAISAL FORM DETAILS</h3>
           
              
              <button className='btn btn-primary popup_btn down_btn' onClick={handleDownload}>Download</button>
@@ -225,19 +225,19 @@ const EmpDetails = () => {
             <div className='row'>
               <div className='col-3'></div>
               <div className='col-4'>
-                <h5>COMMENT THREE</h5>
+                <h5>YOUR RATING</h5>
               </div>
               <div className='col-3 ms-3'>
-                <h5>{empdata.commThree}</h5>
+                <h5>{empdata.rateMain}</h5>
               </div>
             </div>
             <div className='row'>
               <div className='col-3'></div>
               <div className='col-4'>
-                <h5>PLACE</h5>
+                <h5>REVIEWER NAME</h5>
               </div>
               <div className='col-3 ms-3'>
-                <h5>{empdata.place}</h5>
+                <h5>{empdata.reviewerNameTwo}</h5>
               </div>
             </div>
             <div className='row'>
