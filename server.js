@@ -7,8 +7,13 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const MongoClient = require('mongodb').MongoClient;
-const uri = 'mongodb+srv://ParthiGMR:Parthiban7548@parthibangmr.1quwer2.mongodb.net/?retryWrites=true&w=majority';
+// const uri = 'mongodb+srv://ParthiGMR:Parthiban7548@parthibangmr.1quwer2.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+
+require('dotenv').config();
+const uri = process.env.MONGODB_URI;
+const port = process.env.PORT || 8000;
 
 client.connect(err => {
     if (err) {
@@ -42,7 +47,7 @@ const middlewares = jsonServer.defaults({
     static: "./build"
 })
 
-const port = process.env.PORT || 8000;
+// const port = process.env.PORT || 8000;
 server.use(middlewares);
 server.use(
     jsonServer.rewriter({

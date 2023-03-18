@@ -27,7 +27,7 @@ const EmpEdit = () => {
  
   // const [empdata,empdatachange]=useState({})
   useEffect(()=> {
-    fetch("https://new-module-of3z-4lrjzg23x-parthiban024.vercel.app/employee/"+empid).then((res) => {
+    fetch("http://localhost:8000/employee/"+empid).then((res) => {
       return res.json();
     }).then((resp) => {
       idchange(resp.id);
@@ -89,7 +89,7 @@ e.preventDefault();
 const empdata = { name, emppid, reviewerName,commOne, commTwo,commThree, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen, place, date, sign };
 
 // console.log({id,name,email,phone})
-fetch("https://new-module-of3z-4lrjzg23x-parthiban024.vercel.app/employee/"+empid,{
+fetch("http://localhost:8000/employee/"+empid,{
 method:"PUT",
 headers:{"content-type":"application/json"},
 body:JSON.stringify(empdata)
