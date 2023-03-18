@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useRef} from "react";
 import { Route, Routes, Navigate, Link, useNavigate } from "react-router-dom";
 import Objectways from "./Images/Objectways.svg";
 import Form_Inout from "./Images/form_input_image.svg";
@@ -22,17 +22,13 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-// import crypto from 'crypto'
+// import React, { useRef } from 'react';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const EmpCreate = () => {
 
-  // const MongoClient = require('mongodb').MongoClient;
-
-
-  // const uri = "mongodb+srv://<username>:<password>@cluster0.mongodb.net/test?retryWrites=true&w=majority";
-
   const navigate = useNavigate();
-
   const [id, idchange] = useState("");
   const [name, namechange] = useState("");
   const [emppid, emppidchange] = useState("");
@@ -56,7 +52,7 @@ const EmpCreate = () => {
   const [date, datechange] = useState("");
   const [sign, signchange] = useState("");
   const [validation, valchange] = useState("");
-
+  const formRef = useRef(null);
   const handleSubmit = (e) => {
 
 
@@ -64,29 +60,43 @@ const EmpCreate = () => {
     const empdata = { name, emppid, reviewerName, reviewerNameTwo, rateMain, commOne, commTwo, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen, date, sign };
 
     //  
+    html2canvas(formRef.current).then(canvas => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF();
 
-    fetch("http://localhost:8000/employee", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(empdata)
-    }).then((res) => {
-      Swal.fire(
-        'Data Saved!',
-        'You clicked the button!',
-        'success'
-      )
-      navigate('/popup');
-    }).catch((err) => {
-      console.log(err.message)
-    })
+      // Calculate the page height based on the aspect ratio of the screenshot image
+      const pageHeight = pdf.internal.pageSize.getWidth() * canvas.height / canvas.width;
+
+      // Add the screenshot image to the PDF document
+      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
+
+      // Download the PDF document
+      pdf.save(`${empdata.name}.pdf`);
+    });
+    // fetch("http://localhost:8000/employee", {
+    //   method: "POST",
+    //   headers: { "content-type": "application/json" },
+    //   body: JSON.stringify(empdata)
+    // }).then((res) => {
+    //   Swal.fire(
+    //     'Data Saved!',
+    //     'You clicked the button!',
+    //     'success'
+    //   )
+    //   navigate('/popup');
+    // }).catch((err) => {
+    //   console.log(err.message)
+    // })
 
 
 
   }
   return (
+    <form autoComplete="off" className="scroll-to" onSubmit={handleSubmit} id="scrollable-div" ref={formRef}> 
     <div className="font_family">
       <div className="container px-5 mt-5 bg">
         <div className="row">
+       
 <div className="col  setTwo wholerow " >
             <div className="d-flex justify-content-center">
           <img src={Objectways} alt="Logo" className='logo_details mt-3 ' />
@@ -100,20 +110,15 @@ const EmpCreate = () => {
               <label className="id_display">ID</label>
               <input value={id} disabled="disabled" className="form-control id_display"></input>
             </div>
-            <form autoComplete="off" className="scroll-to" onSubmit={handleSubmit} id="scrollable-div">
+            
               <div className="mt-4 mx-5 heading ">
                 <h5 class="ms-2 p-1 " >I. EMPLOYEE INFORMATION</h5>
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-5">
-                  {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
                   <div className="col  mt-3">
-                    {/* <div className="col-5"> */}
-                    {/* <h4 class="mt-2  ">Employee Name :</h4> */}
                     <div>
-                      {/* <label class="lsize">Employee Name :</label> */}
-
-                      <TextField
+                       <TextField
                         sx={{ width: 400 }}
                         label="Employee Name"
                         id="outlined-size-small"
@@ -134,10 +139,8 @@ const EmpCreate = () => {
 
                 </div>
                 <div className="col-5">
-                  {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
                   <div className="row ">
                     <div class="mt-3">
-                      {/* <h4 class=" mt-2 ">Employee ID</h4> */}
                       <TextField
                         sx={{ width: 400 }}
                         label="Employee ID"
@@ -163,8 +166,6 @@ const EmpCreate = () => {
                 <div className="col-5">
                   {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
                   <div className="row ">
-                    {/* <h4 class="  ">Reviewer Name</h4> */}
-
                     <div class="mt-4">
                       <TextField
                         sx={{ width: 400 }}
@@ -847,12 +848,13 @@ const EmpCreate = () => {
                   ></input>
                 </div>
               </div>
-            </form>
+            
           </div>
 
         </div>
       </div>
     </div>
+    </form>
   );
 };
 
