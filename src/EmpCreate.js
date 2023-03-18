@@ -1,4 +1,4 @@
-import React, { useState ,useRef} from "react";
+import React, { useState, useRef } from "react";
 import { Route, Routes, Navigate, Link, useNavigate } from "react-router-dom";
 import Objectways from "./Images/Objectways.svg";
 import Form_Inout from "./Images/form_input_image.svg";
@@ -50,17 +50,20 @@ const EmpCreate = () => {
   const [commOne, commOnechange] = useState("");
   const [commTwo, commTwochange] = useState("");
   const [rateMain, rateMainchange] = useState("");
-  const [date, datechange] = useState("");
-  const [sign, signchange] = useState("");
+  // const [date, datechange] = useState("");
+  // const [sign, signchange] = useState("");
   const [validation, valchange] = useState("");
+
   const formRef = useRef(null);
   const handleSubmit = (e) => {
 
-
+    const submitButton = document.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.style.display = 'none';
+    }
     e.preventDefault();
-    const empdata = { name, emppid, reviewerName, selectEleven, reviewerNameTwo, rateMain, commOne, commTwo, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen, date, sign };
-
-    //  
+    const empdata = { name, emppid, reviewerName, selectEleven, reviewerNameTwo, rateMain, commOne, commTwo, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen };
+// Hide the "Submit" button from the PDF
     html2canvas(formRef.current).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
@@ -74,6 +77,10 @@ const EmpCreate = () => {
       // Download the PDF document
       pdf.save(`${empdata.name}.${empdata.emppid}.pdf`);
     });
+    if (submitButton) {
+      submitButton.style.display = '';
+    }
+      // Restore the "Submit" button after the PDF is generated
     // fetch("http://localhost:8000/employee", {
     //   method: "POST",
     //   headers: { "content-type": "application/json" },
@@ -90,28 +97,27 @@ const EmpCreate = () => {
     // })
 
 
-
   }
   return (
-    <form autoComplete="off" className="scroll-to" onSubmit={handleSubmit} id="scrollable-div" ref={formRef}> 
-    <div className="font_family">
-      <div className="container px-5 mt-5 bg">
-        <div className="row">
-       
-<div className="col  setTwo wholerow " >
-            <div className="d-flex justify-content-center">
-          <img src={Objectways} alt="Logo" className='logo_details mt-3 ' />
-          </div>
-            <h3 className="textOne d-flex justify-content-center app mt-4 emp_list_head b-heading">
-              ANNUAL APPRAISAL FORM
+    <form autoComplete="off" className="scroll-to" onSubmit={handleSubmit} id="scrollable-div" ref={formRef}>
+      <div className="font_family">
+        <div className="container px-5 mt-5 bg">
+          <div className="row">
+  
+            <div className="col  setTwo wholerow " >
+              <div className="d-flex justify-content-center">
+                <img src={Objectways} alt="Logo" className='logo_details mt-3 ' />
+              </div>
+              <h3 className="textOne d-flex justify-content-center app mt-4 emp_list_head b-heading">
+                ANNUAL APPRAISAL FORM
 
-            </h3>
+              </h3>
 
-            <div className="form-group">
-              <label className="id_display">ID</label>
-              <input value={id} disabled="disabled" className="form-control id_display"></input>
-            </div>
-            
+              <div className="form-group">
+                <label className="id_display">ID</label>
+                <input value={id} disabled="disabled" className="form-control id_display"></input>
+              </div>
+
               <div className="mt-4 mx-5 heading ">
                 <h5 class="ms-2 p-1 " >I. EMPLOYEE INFORMATION</h5>
               </div>
@@ -119,7 +125,7 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="col  mt-3">
                     <div>
-                       <TextField
+                      <TextField
                         sx={{ width: 400 }}
                         label="Employee Name"
                         id="outlined-size-small"
@@ -251,7 +257,7 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                        Select
+                          Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
@@ -292,7 +298,7 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                        Select
+                          Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
@@ -429,7 +435,7 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                        Select
+                          Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
@@ -477,7 +483,7 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                         Select
+                          Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
@@ -521,7 +527,7 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                        Select
+                          Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
@@ -581,7 +587,7 @@ const EmpCreate = () => {
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
                         <InputLabel id="demo-select-small">
-                        Select
+                          Select
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
@@ -714,34 +720,34 @@ const EmpCreate = () => {
 
               <div class="mb-3  mx-5 ">
                 <label for="exampleFormControlTextarea1" class="form-label"><h5>Comment on the employee's overall performance:</h5></label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                   name="commOne"
                   value={commOne}
                   onMouseDown={e => valchange(true)}
                   onChange={e => commOnechange(e.target.value)}
-                  ></textarea>
+                ></textarea>
               </div>
 
               <div className="mt-5 mx-5  heading">
                 <h5 class="ms-2   p-1">V. REVIEWER COMMENTS (optional)</h5>
-                </div>
-                <div class="mx-5 mt-3">
+              </div>
+              <div class="mx-5 mt-3">
                 <textarea class="form-control  " id="exampleFormControlTextarea1" rows="3"
-                 name="commTwo"
-                 value={commTwo}
-                 onMouseDown={e => valchange(true)}
-                 onChange={e => commTwochange(e.target.value)}
-                 ></textarea></div>
+                  name="commTwo"
+                  value={commTwo}
+                  onMouseDown={e => valchange(true)}
+                  onChange={e => commTwochange(e.target.value)}
+                ></textarea></div>
               {/* </div> */}
 
               <div className="mt-5 mx-5 heading ">
                 <h5 class="ms-2 p-1 " >VI. ACKNOWLEDGEMENT</h5>
               </div>
               <div className="row d-flex justify-content-center">
-              <div className="col-5">
+                <div className="col-5">
                   <div className="form-group mt-3 d-flex">
                     <div>
-                      <FormControl  size="small">
+                      <FormControl size="small">
                         <InputLabel id="demo-select-small">
                           Overall Rating
                         </InputLabel>
@@ -770,33 +776,8 @@ const EmpCreate = () => {
                   </div>
 
                 </div>
-        
-      {/* date */}
-      <div className="col-5">
-                  <div className="form-group mt-4 d-flex justify-content-center">
-                    <div>
-                      <TextField
-                      sx={{ width: 400 }}
-                        // label="Date"
-                        id="outlined-size-small"
-                        size="small"
-                        className="email_login"
-                        type="date"
-                        name="date"
-                        value={date}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => datechange(e.target.value)}
-                        required
-                      />
-                      <div>
-                        {date.length === 0 && validation && <span className="text-danger">Date is Required</span>}
-                      </div>
-                    </div>
-                  </div>
 
-                </div>
-              </div>
-              <div className="row d-flex justify-content-center">
+                {/* date */}
                 <div className="col-5">
                   {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
                   <div className="row ">
@@ -823,30 +804,6 @@ const EmpCreate = () => {
                   </div>
 
                 </div>
-                <div className="col-5">
-                  <div className="form-group mt-4 d-flex justify-content-center">
-                    <div>
-                      <TextField
-                        label="Reviewer Signature"
-                        sx={{ width: 400 }}
-                        id="outlined-size-small"
-                        size="small"
-                        className="email_login"
-                        type="text"
-                        name="sign"
-                        value={sign}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => signchange(e.target.value)}
-                        required
-                      />
-                      <div>
-                        {/* {sign.length === 0 && validation && <span className="text-danger">Required</span>} */}
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              
               </div>
               <div className="btn_bg">
                 <div className=" pb-5 container d-flex justify-content-center">
@@ -857,13 +814,13 @@ const EmpCreate = () => {
                   ></input>
                 </div>
               </div>
-            
-          </div>
 
+            </div>
+           
+          </div>
         </div>
       </div>
-    </div>
-    </form>
+      </form>
   );
 };
 

@@ -425,4 +425,9 @@ box-shadow: 0px 0px 50px 1px whitesmoke !important;
       color:#46227f;
       font-weight: 600 !important;
     }
-   
+    @media print {
+      button[type="submit"] {
+        display: none !important;
+      }
+    }
+    
