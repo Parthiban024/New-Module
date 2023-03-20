@@ -92,7 +92,7 @@ const EmpCreate = () => {
   return (
     <form autoComplete="off" className="scroll-to" onSubmit={handleSubmit} id="scrollable-div" ref={formRef}>
       <div className="font_family">
-        <div className="container px-5 mt-5 bg">
+        <div className="container px-5 bg">
           <div className="row">
   
             <div className="col  setTwo wholerow " >
