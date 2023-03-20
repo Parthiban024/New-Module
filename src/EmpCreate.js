@@ -769,7 +769,7 @@ const EmpCreate = () => {
                     <div>
                       <TextField
                         sx={{ width: 400 }}
-                       placeholder="Employee Name"
+                       placeholder="Reviewer Name"
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
