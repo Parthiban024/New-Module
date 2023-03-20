@@ -26,6 +26,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { display, style } from "@mui/system";
+import { win32 } from "path";
 
 const EmpCreate = () => {
 
@@ -35,8 +36,8 @@ const EmpCreate = () => {
   const [emppid, emppidchange] = useState("");
   const [reviewerName, reviewerNamechange] = useState("");
   const [reviewerNameTwo, reviewerNameTwochange] = useState("");
-  const [reviewPeriod, reviewPeriodchange] = useState("01/06/2021");
-  const [reviewPeriodTwo, reviewPeriodtwochange] = useState("30/07/2022");
+  const [reviewPeriod, reviewPeriodchange] = useState("01/07/2021");
+  const [reviewPeriodTwo, reviewPeriodtwochange] = useState("30/06/2022");
   const [selectOne, selectOnechange] = useState("");
   const [selectTwo, selectTwochange] = useState("");
   const [selectThree, selectThreechange] = useState("");
@@ -86,6 +87,7 @@ const EmpCreate = () => {
     
       // Show the "Submit" button again
       submitButton.style.display = "block";
+      
     });
 
    }
