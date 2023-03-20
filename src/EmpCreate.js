@@ -26,7 +26,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { display, style } from "@mui/system";
-import { win32 } from "path";
+// import { win32 } from "path";
 
 const EmpCreate = () => {
 
@@ -755,11 +755,11 @@ const EmpCreate = () => {
                            required
                         >
                         
-                          <MenuItem value="Select">Select One</MenuItem>
-                          <MenuItem value="Exceeds expectations"><b>(A)</b></MenuItem>
-                          <MenuItem value="Meets expectations"><b>(B)</b></MenuItem>
-                          <MenuItem value="Needs improvement"><b>(C)</b></MenuItem>
-                          <MenuItem value="Unacceptable"><b>(D)</b></MenuItem>
+                        <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations"><b>(A)</b>Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations"><b>(B)</b>Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement"><b>(C)</b>Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable"><b>(D)</b>Unacceptable</MenuItem>
                         </Select>
                       </FormControl>
                     </div>
