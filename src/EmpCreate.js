@@ -35,8 +35,8 @@ const EmpCreate = () => {
   const [emppid, emppidchange] = useState("");
   const [reviewerName, reviewerNamechange] = useState("");
   const [reviewerNameTwo, reviewerNameTwochange] = useState("");
-  const [reviewPeriod, reviewPeriodchange] = useState("30/07/2021");
-  const [reviewPeriodTwo, reviewPeriodtwochange] = useState("01/06/2022");
+  const [reviewPeriod, reviewPeriodchange] = useState("01/06/2021");
+  const [reviewPeriodTwo, reviewPeriodtwochange] = useState("30/07/2022");
   const [selectOne, selectOnechange] = useState("");
   const [selectTwo, selectTwochange] = useState("");
   const [selectThree, selectThreechange] = useState("");
@@ -79,7 +79,7 @@ const EmpCreate = () => {
       pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pageHeight);
     
       // Add empdata to the PDF document
-      pdf.text(JSON.stringify(empdata), 10, pageHeight + 10);
+      // pdf.text(JSON.stringify(empdata), 10, pageHeight + 10);
     
       // Download the PDF document
       pdf.save(`${empdata.name}.${empdata.emppid}.pdf`);
@@ -765,7 +765,7 @@ const EmpCreate = () => {
 
                 </div>
                 <div className="col-5">
-                  <div className="col  mt-3">
+                  <div className="col  mt-4">
                     <div>
                       <TextField
                         sx={{ width: 400 }}

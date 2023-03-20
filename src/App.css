@@ -2,7 +2,9 @@
   float: right;
   margin-right: 3px;
 }
-
+body{
+  background-color: #F1EDF7 !important;
+}
 .bg{
   padding-bottom: 50px;
 }
