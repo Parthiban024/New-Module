@@ -719,7 +719,7 @@ const EmpCreate = () => {
                 ></textarea>
               </div>
 
-              <div className="mt-5 mx-5  heading">
+              <div className="mt-3 mx-5  heading">
                 <h5 class="ms-2   p-1">V. REVIEWER COMMENTS (optional)</h5>
               </div>
               <div class="mx-5 mt-3">
@@ -731,7 +731,7 @@ const EmpCreate = () => {
                 ></textarea></div>
               {/* </div> */}
 
-              <div className="mt-5 mx-5 heading ">
+              <div className="mt-3 mx-5 heading ">
                 <h5 class="ms-2 p-1 " >VI. ACKNOWLEDGEMENT</h5>
               </div>
               <div className="row d-flex justify-content-center">
