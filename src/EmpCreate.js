@@ -25,6 +25,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 // import React, { useRef } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { display, style } from "@mui/system";
 
 const EmpCreate = () => {
 
@@ -55,49 +56,39 @@ const EmpCreate = () => {
   const [validation, valchange] = useState("");
 
   const formRef = useRef(null);
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => {  
 
-    const submitButton = document.querySelector('button[type="submit"]');
-    if (submitButton) {
-      submitButton.style.display = 'none';
-    }
     e.preventDefault();
-    const empdata = { name, emppid, reviewerName, selectEleven, reviewerNameTwo, rateMain, commOne, commTwo, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen };
-// Hide the "Submit" button from the PDF
+    // Hide the "Submit" button from the form
+    // Hide the "Submit" button from the form
+    const submitButton = document.getElementById("submit");
+    submitButton.style.display = "none";
+    
+    // Get the form data
+    const empdata = { name, emppid, reviewerName, reviewerNameTwo, rateMain, commOne, commTwo, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen };
+    
+    // Take a screenshot of the form
     html2canvas(formRef.current).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
-
+    
       // Calculate the page height based on the aspect ratio of the screenshot image
       const pageHeight = pdf.internal.pageSize.getWidth() * canvas.height / canvas.width;
-
+    
       // Add the screenshot image to the PDF document
-      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
-
+      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pageHeight);
+    
+      // Add empdata to the PDF document
+      pdf.text(JSON.stringify(empdata), 10, pageHeight + 10);
+    
       // Download the PDF document
       pdf.save(`${empdata.name}.${empdata.emppid}.pdf`);
+    
+      // Show the "Submit" button again
+      submitButton.style.display = "block";
     });
-    if (submitButton) {
-      submitButton.style.display = '';
-    }
-      // Restore the "Submit" button after the PDF is generated
-    // fetch("http://localhost:8000/employee", {
-    //   method: "POST",
-    //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify(empdata)
-    // }).then((res) => {
-    //   Swal.fire(
-    //     'Data Saved!',
-    //     'You clicked the button!',
-    //     'success'
-    //   )
-    //   navigate('/popup');
-    // }).catch((err) => {
-    //   console.log(err.message)
-    // })
 
-
-  }
+   }
   return (
     <form autoComplete="off" className="scroll-to" onSubmit={handleSubmit} id="scrollable-div" ref={formRef}>
       <div className="font_family">
@@ -261,7 +252,6 @@ const EmpCreate = () => {
                         </InputLabel>
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
                           label="Select"
@@ -811,6 +801,7 @@ const EmpCreate = () => {
                     type="submit"
                     className="btn btn-primary submit"
                     value="Submit"
+                    id="submit"
                   ></input>
                 </div>
               </div>
