@@ -780,7 +780,7 @@ const EmpCreate = () => {
                         onChange={e => reviewerNameTwochange(e.target.value)}
                         required
                       />
-                  
+                    
                    
                       <div className="d-flex">
                         {reviewerName.length === 0 && validation && <span className="text-danger">Reviewer Name is required</span>}
