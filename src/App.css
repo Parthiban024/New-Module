@@ -13,8 +13,8 @@
 
 .setTwo{
   /* height: 620px; */
-  background-color: #F1EDF7;
-  border: white;
+  background-color: white;
+  border: #d9cce0;
 }
 .wholeRow{
   border-radius: 5px 0px 0px 5px !important;
