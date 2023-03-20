@@ -35,8 +35,8 @@ const EmpCreate = () => {
   const [emppid, emppidchange] = useState("");
   const [reviewerName, reviewerNamechange] = useState("");
   const [reviewerNameTwo, reviewerNameTwochange] = useState("");
-  const [reviewPeriod, reviewPeriodchange] = useState("");
-  const [reviewPeriodTwo, reviewPeriodtwochange] = useState("");
+  const [reviewPeriod, reviewPeriodchange] = useState("30/07/2021");
+  const [reviewPeriodTwo, reviewPeriodtwochange] = useState("01/06/2022");
   const [selectOne, selectOnechange] = useState("");
   const [selectTwo, selectTwochange] = useState("");
   const [selectThree, selectThreechange] = useState("");
@@ -54,7 +54,7 @@ const EmpCreate = () => {
   // const [date, datechange] = useState("");
   // const [sign, signchange] = useState("");
   const [validation, valchange] = useState("");
-
+  const [value, setValue] = useState('Select One');
   const formRef = useRef(null);
   const handleSubmit = (e) => {  
 
@@ -118,7 +118,7 @@ const EmpCreate = () => {
                     <div>
                       <TextField
                         sx={{ width: 400 }}
-                        label="Employee Name"
+                       placeholder="Employee Name"
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
@@ -129,6 +129,8 @@ const EmpCreate = () => {
                         onChange={e => namechange(e.target.value)}
                         required
                       />
+                  
+                   
                       <div className="d-flex">
                         {name.length === 0 && validation && <span className="text-danger">Employee Name is required</span>}
                       </div>
@@ -141,7 +143,7 @@ const EmpCreate = () => {
                     <div class="mt-3">
                       <TextField
                         sx={{ width: 400 }}
-                        label="Employee ID"
+                      placeholder="Employee ID"
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
@@ -167,7 +169,7 @@ const EmpCreate = () => {
                     <div class="mt-4">
                       <TextField
                         sx={{ width: 400 }}
-                        label="Reviewer Name"
+                        placeholder="Reviewer Name"
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
@@ -194,7 +196,7 @@ const EmpCreate = () => {
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
-                        type="date"
+                        type="text"
                         name="reviewPeriod"
                         value={reviewPeriod}
                         onMouseDown={e => valchange(true)}
@@ -202,7 +204,7 @@ const EmpCreate = () => {
                         required
                       />
                       <div>
-                        {reviewPeriod.length === 0 && validation && <span className="text-danger">Start date is Required</span>}
+                         <span className=""><strong>START DATE</strong></span>
                       </div>
                     </div>
                     <div class="ms-2">
@@ -212,7 +214,7 @@ const EmpCreate = () => {
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
-                        type="date"
+                        type="text"
                         name="reviewPeriodTwo"
                         value={reviewPeriodTwo}
                         onMouseDown={e => valchange(true)}
@@ -220,7 +222,7 @@ const EmpCreate = () => {
                         required
                       />
                       <div>
-                        {reviewPeriodTwo.length === 0 && validation && <span className="text-danger">End Date is Required</span>}
+                        <span className=""><strong>END DATE</strong></span>
                       </div>
                     </div>
                   </div>
@@ -247,23 +249,24 @@ const EmpCreate = () => {
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
                           name="selectOne"
-                          value={selectOne}
+                          // value={value}
                           onMouseDown={e => valchange(true)}
                           onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -286,24 +289,25 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectTwo"
-                          value={selectTwo}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectTwochange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -330,25 +334,25 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectThree"
-                          value={selectThree}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectThreechange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -376,25 +380,25 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectFour"
-                          value={selectFour}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectFourchange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -423,25 +427,25 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectFive"
-                          value={selectFive}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectFivechange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -471,25 +475,25 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectSix"
-                          value={selectSix}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectSixchange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -515,25 +519,25 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectSeven"
-                          value={selectSeven}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectSevenchange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -575,25 +579,25 @@ const EmpCreate = () => {
                   <div className="form-group mt-3 d-flex justify-content-center">
 
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectEight"
-                          value={selectEight}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectEightchange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -621,25 +625,25 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectNine"
-                          value={selectNine}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectNinechange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -678,24 +682,21 @@ const EmpCreate = () => {
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
-                          Select
-                        </InputLabel>
+                     
                         <Select
-                          sx={{ width: 250 }}
-
-                          labelId="demo-select-small"
-                          id="demo-select-small"
-                          label="Select"
-                          className="email_login"
-                          name="selectTen"
-                          value={selectTen}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectTenchange(e.target.value)}
-                          required
+                           sx={{ width: 400 }}
+                           labelId="demo-select-small"
+                           id="demo-select-small"
+                           defaultValue="Select"
+                           className="email_login"
+                           name="selectOne"
+                           // value={value}
+                           onMouseDown={e => valchange(true)}
+                           onChange={e => selectOnechange(e.target.value)}
+                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                        
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations"><b>(A)</b>Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations"><b>(B)</b>Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement"><b>(C)</b>Needs improvement</MenuItem>
@@ -735,27 +736,24 @@ const EmpCreate = () => {
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-5">
-                  <div className="form-group mt-4 d-flex">
+                  <div className="form-group mt-3 d-flex">
                     <div>
-                      <FormControl size="small">
-                        <InputLabel id="demo-select-small">
-                          Overall Rating
-                        </InputLabel>
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                     
                         <Select
-                          sx={{ width: 400 }}
-
-                          labelId="demo-select-small"
-                          id="demo-select-small" 
-                          label="Overall Rating"
-                          className="email_login"
-                          name="selectEleven"
-                          value={selectEleven}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectElevenchange(e.target.value)}
-                          required
+                           sx={{ width: 400 }}
+                           labelId="demo-select-small"
+                           id="demo-select-small"
+                           defaultValue="Select"
+                           className="email_login"
+                           name="selectOne"
+                           // value={value}
+                           onMouseDown={e => valchange(true)}
+                           onChange={e => selectOnechange(e.target.value)}
+                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                        
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations"><b>(A)</b></MenuItem>
                           <MenuItem value="Meets expectations"><b>(B)</b></MenuItem>
                           <MenuItem value="Needs improvement"><b>(C)</b></MenuItem>
@@ -766,17 +764,12 @@ const EmpCreate = () => {
                   </div>
 
                 </div>
-
-                {/* date */}
                 <div className="col-5">
-                  {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
-                  <div className="row ">
-                    {/* <h4 class="  ">Reviewer Name</h4> */}
-
-                    <div class="mt-4">
+                  <div className="col  mt-3">
+                    <div>
                       <TextField
                         sx={{ width: 400 }}
-                        label="Reviewer Name"
+                       placeholder="Employee Name"
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
@@ -787,7 +780,9 @@ const EmpCreate = () => {
                         onChange={e => reviewerNameTwochange(e.target.value)}
                         required
                       />
-                      <div>
+                  
+                   
+                      <div className="d-flex">
                         {reviewerName.length === 0 && validation && <span className="text-danger">Reviewer Name is required</span>}
                       </div>
                     </div>
