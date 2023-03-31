@@ -90,7 +90,7 @@ const EmpCreate = () => {
     html2canvas(formRef.current).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF({
-        orientation: 'landscape',
+        orientation: 'portrait',
         unit: 'px',
         format: [window.screen.width, window.screen.height]
       });
@@ -111,6 +111,7 @@ const EmpCreate = () => {
       submitButton.style.display = "block";
       
     });
+
 
 
    }
