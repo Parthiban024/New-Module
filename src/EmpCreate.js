@@ -681,7 +681,42 @@ const EmpCreate = () => {
               
               <div className="row d-flex justify-content-center">
               <h5 className="text-center newHead p-2"><b>LEADERSHIP PROMISE </b></h5>
-              
+                         
+              <div className="row d-flex justify-content-center">
+           
+                <div className="col-3">
+                  <h5 class="mt-1 c-blue"><b>Leadership Area </b></h5>
+                 
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+                 
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className="ms-5 c-blue"><b>Strength</b></h5>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className="ms-5 c-blue"><b>Proficient</b></h5>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className=" c-blue"><b>Developmental Need</b></h5>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
                 <div className="col-3">
                   <h6 className="mt-4"><b>Is motivated to lead     </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
@@ -1078,6 +1113,42 @@ const EmpCreate = () => {
 
               <div className="row d-flex justify-content-center">
               <h5 className="text-center newHead p-2"><b>INTERPERSONAL SKILLS  </b></h5>
+                         
+              <div className="row d-flex justify-content-center">
+           
+                <div className="col-3">
+                  <h5 class="mt-1 c-blue"><b>Leadership Area </b></h5>
+                 
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+                 
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className="ms-5 c-blue"><b>Strength</b></h5>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className="ms-5 c-blue"><b>Proficient</b></h5>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className=" c-blue"><b>Developmental Need</b></h5>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
                 <div className="col-3">
                   <h6 className="mt-4"><b>Communicates clearly and effectively     </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
@@ -1477,6 +1548,42 @@ const EmpCreate = () => {
 
               <div className="row d-flex justify-content-center">
               <h5 className="text-center newHead p-2"><b>DEMONSTRATION OF RESULTS  </b></h5>
+                         
+              <div className="row d-flex justify-content-center">
+           
+                <div className="col-3">
+                  <h5 class="mt-1 c-blue"><b>Leadership Area </b></h5>
+                 
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+                 
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className="ms-5 c-blue"><b>Strength</b></h5>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className="ms-5 c-blue"><b>Proficient</b></h5>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className=" c-blue"><b>Developmental Need</b></h5>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
                 <div className="col-3">
                   
                   <h6 className="mt-4"><b>Shows positive team/unit results     </b></h6>
@@ -1760,6 +1867,42 @@ const EmpCreate = () => {
 
               <div className="row d-flex justify-content-center">
               <h5 className="text-center newHead p-2"><b>DEVELOPMENTAL ORIENTATION  </b></h5>
+                         
+              <div className="row d-flex justify-content-center">
+           
+                <div className="col-3">
+                  <h5 class="mt-1 c-blue"><b>Leadership Area </b></h5>
+                 
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+                 
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className="ms-5 c-blue"><b>Strength</b></h5>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className="ms-5 c-blue"><b>Proficient</b></h5>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className=" c-blue"><b>Developmental Need</b></h5>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
                 <div className="col-3">
                   <h6 className="mt-4"><b>Has accurate self-insight      </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
