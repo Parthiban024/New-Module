@@ -131,7 +131,7 @@ const EmpCreate = () => {
               </div>
 
               <div className="mt-4 mx-5 heading ">
-                <h5 class="ms-2 p-1 text-center" >EMPLOYEE INFORMATION</h5>
+                <h5 class="ms-2 p-1 text-center" ><b>EMPLOYEE INFORMATION</b></h5>
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-5">
@@ -242,13 +242,13 @@ const EmpCreate = () => {
                       </div>
                     </div>
                   </div>
-
+ 
                 </div>
               </div>
 
 
               <div className="row d-flex justify-content-center">
-              <h6 className="text-center p-2 newHead mt-5"><b>Support of Objectways Values  </b></h6>
+              <h5 className="text-center p-2 newHead mt-5"><b>SUPPORT OF OBJECTWAYS VALUES </b></h5>
               
               <div className="row d-flex justify-content-center">
            
@@ -374,7 +374,7 @@ const EmpCreate = () => {
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Displays respect for others      </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -462,7 +462,7 @@ const EmpCreate = () => {
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Is a good team player </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -550,7 +550,7 @@ const EmpCreate = () => {
               
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Identifies with management </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -680,9 +680,10 @@ const EmpCreate = () => {
               </div>  
               
               <div className="row d-flex justify-content-center">
-              <h6 className="text-center newHead p-2"><b>Support of Objectways Values  </b></h6>
+              <h5 className="text-center newHead p-2"><b>LEADERSHIP PROMISE </b></h5>
+              
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Is motivated to lead     </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -771,7 +772,7 @@ const EmpCreate = () => {
 
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Accepts leadership responsibility      </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -856,7 +857,7 @@ const EmpCreate = () => {
 
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Mobilizes resources/people to action      </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -945,7 +946,7 @@ const EmpCreate = () => {
 
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Leads teams that have high morale      </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1076,9 +1077,9 @@ const EmpCreate = () => {
               </div>
 
               <div className="row d-flex justify-content-center">
-              <h6 className="text-center newHead p-2"><b>Support of Objectways Values  </b></h6>
+              <h5 className="text-center newHead p-2"><b>INTERPERSONAL SKILLS  </b></h5>
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Communicates clearly and effectively     </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1166,7 +1167,7 @@ const EmpCreate = () => {
 
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Makes effective presentations      </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1255,7 +1256,7 @@ const EmpCreate = () => {
 
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Demonstrates diplomacy   </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1344,7 +1345,7 @@ const EmpCreate = () => {
 
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Is trusted and respected    </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1475,10 +1476,10 @@ const EmpCreate = () => {
               </div>
 
               <div className="row d-flex justify-content-center">
-              <h6 className="text-center newHead p-2"><b>Support of Objectways Values  </b></h6>
+              <h5 className="text-center newHead p-2"><b>DEMONSTRATION OF RESULTS  </b></h5>
                 <div className="col-3">
                   
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Shows positive team/unit results     </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1557,7 +1558,7 @@ const EmpCreate = () => {
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Displays objective indicators of success      </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1636,7 +1637,7 @@ const EmpCreate = () => {
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Accomplishes major assignments      </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1758,9 +1759,9 @@ const EmpCreate = () => {
               </div>
 
               <div className="row d-flex justify-content-center">
-              <h6 className="text-center newHead p-2"><b>Support of Objectways Values  </b></h6>
+              <h5 className="text-center newHead p-2"><b>DEVELOPMENTAL ORIENTATION  </b></h5>
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Has accurate self-insight      </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1844,7 +1845,7 @@ const EmpCreate = () => {
 
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Is coachable; accepts feedback      </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1928,7 +1929,7 @@ const EmpCreate = () => {
 
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Has history of learning from experience   </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -2011,7 +2012,7 @@ const EmpCreate = () => {
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Quickly learns new tasks    </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -2093,7 +2094,7 @@ const EmpCreate = () => {
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  <h6 className="mt-4"><b>Self-initiates development activities   </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
