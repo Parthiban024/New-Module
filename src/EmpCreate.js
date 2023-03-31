@@ -80,7 +80,6 @@ const EmpCreate = () => {
 
     e.preventDefault();
     // Hide the "Submit" button from the form
-    // Hide the "Submit" button from the form
     const submitButton = document.getElementById("submit");
     submitButton.style.display = "none";
     
@@ -90,10 +89,14 @@ const EmpCreate = () => {
     // Take a screenshot of the form
     html2canvas(formRef.current).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF();
+      const pdf = new jsPDF({
+        orientation: 'landscape',
+        unit: 'px',
+        format: [window.screen.width, window.screen.height]
+      });
     
-      // Calculate the page height based on the aspect ratio of the screenshot image
-      const pageHeight = pdf.internal.pageSize.getWidth() * canvas.height / canvas.width;
+      // Calculate the page height based on the screen height
+      const pageHeight = pdf.internal.pageSize.getHeight();
     
       // Add the screenshot image to the PDF document
       pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pageHeight);
@@ -108,6 +111,7 @@ const EmpCreate = () => {
       submitButton.style.display = "block";
       
     });
+
 
    }
   return (
