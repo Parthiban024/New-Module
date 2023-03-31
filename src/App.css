@@ -5,6 +5,9 @@
 body{
   background-color: #F1EDF7 !important;
 }
+.selectDefault{
+  margin-left: -12.2px;
+}
 .bg{
   padding-bottom: 50px;
 }
