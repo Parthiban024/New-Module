@@ -52,9 +52,28 @@ const EmpCreate = () => {
   const [commOne, commOnechange] = useState("");
   const [commTwo, commTwochange] = useState("");
   const [rateMain, rateMainchange] = useState("");
-  // const [date, datechange] = useState("");
-  // const [sign, signchange] = useState("");
+  const [date, datechange] = useState("");
+  const [sign, signchange] = useState("");
   const [validation, valchange] = useState("");
+  const [twl, twlChange] = useState("");
+  const [thirteen, thirteenChange] = useState("");
+  const [fourteen, fourteenChange] = useState("");
+  const [twll, twllChange] = useState("");
+  const [fivteen, fivteenChange] = useState("");
+  const [sixteen, sixChange] = useState("");
+  const [seventeen, sevenChange] = useState("");
+  const [eightteen, eightChange] = useState("");
+  const [nineteen, nineChange] = useState("");
+  const [twenty, twentyChange] = useState("");
+  const [twyone, twyoneChange] = useState("");
+  const [twytwo, twytwoChange] = useState("");
+  const [twythree, twythreeChange] = useState("");
+  const [twyfour , twyfourChange] = useState("");
+  const [twyfive, twyfiveChange] = useState("");
+  const [twysix, twysixChange] = useState("");
+  const [twyseven, twysevenChange] = useState("");
+  const [twyeight, twyeightChange] = useState("");
+  const [twynine, twynineChange] = useState("");
   const [value, setValue] = useState('Select One');
   const formRef = useRef(null);
   const handleSubmit = (e) => {  
@@ -112,7 +131,7 @@ const EmpCreate = () => {
               </div>
 
               <div className="mt-4 mx-5 heading ">
-                <h5 class="ms-2 p-1 " >I. EMPLOYEE INFORMATION</h5>
+                <h5 class="ms-2 p-1 text-center" >EMPLOYEE INFORMATION</h5>
               </div>
               <div className="row d-flex justify-content-center">
                 <div className="col-5">
@@ -218,7 +237,9 @@ const EmpCreate = () => {
                         onChange={e => reviewPeriodchange(e.target.value)}
                         required
                       />
-                  
+                        <div className="d-flex">
+                        {name.length === 0 && validation && <span className="text-danger">Date is required</span>}
+                      </div>
                     </div>
                   </div>
 
@@ -227,9 +248,13 @@ const EmpCreate = () => {
 
 
               <div className="row d-flex justify-content-center">
+              <h6 className="text-center p-2 newHead mt-5"><b>Support of Objectways Values  </b></h6>
+              
+              <div className="row d-flex justify-content-center">
+           
                 <div className="col-3">
-                  <h5 class="my-3 c-blue"><b>Leadership Area </b></h5>
-                  <h6><b>Support of Objectways Values  </b></h6>
+                  <h5 class="mt-1 c-blue"><b>Leadership Area </b></h5>
+                 
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -260,7 +285,6 @@ const EmpCreate = () => {
 
                 </div>
               </div>
-              <div className="row d-flex justify-content-center">
                 <div className="col-3">
                   <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
@@ -279,17 +303,15 @@ const EmpCreate = () => {
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="selectOne"
+                        value={selectOne}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => selectOnechange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+              
                     </div>
                   </div>
                     </div>
@@ -305,17 +327,15 @@ const EmpCreate = () => {
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="selectTwo"
+                        value={selectTwo}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => selectTwochange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+                 
                     </div>
                   </div>
                     </div>
@@ -332,10 +352,10 @@ const EmpCreate = () => {
                           id="demo-select-small"
                           defaultValue="Select"
                           className="email_login"
-                          name="selectOne"
+                          name="selectThree"
                           // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                          onChange={e => selectThreechange(e.target.value)}
                           required
                         >
                           
@@ -344,10 +364,7 @@ const EmpCreate = () => {
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+                    
                       </FormControl>
                    
                     </div>
@@ -374,17 +391,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="selectFour"
+                        value={selectFour}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => selectFourchange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+            
                     </div>
                   </div>
                     </div>
@@ -400,17 +415,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="selectFive"
+                        value={selectFive}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => selectFivechange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+             
                     </div>
                   </div>
                     </div>
@@ -430,7 +443,7 @@ Developmental Need is required</span>}
                           name="selectOne"
                           // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                          onChange={e => selectSixchange(e.target.value)}
                           required
                         >
                           
@@ -439,10 +452,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+                    
                       </FormControl>
                    
                     </div>
@@ -469,17 +479,14 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="selectSeven"
+                        value={selectSeven}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => selectSevenchange(e.target.value)}
                         required
                       />
                   
-                   
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+                
                     </div>
                   </div>
                     </div>
@@ -495,17 +502,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="selectEight"
+                        value={selectEight}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => selectEightchange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+              
                     </div>
                   </div>
                     </div>
@@ -522,10 +527,10 @@ Developmental Need is required</span>}
                           id="demo-select-small"
                           defaultValue="Select"
                           className="email_login"
-                          name="selectOne"
+                          name="selectNine"
                           // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                          onChange={e => selectNinechange(e.target.value)}
                           required
                         >
                           
@@ -534,10 +539,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+                     
                       </FormControl>
                    
                     </div>
@@ -565,17 +567,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="selectTen"
+                        value={selectTen}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => selectTenchange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+        
                     </div>
                   </div>
                     </div>
@@ -591,17 +591,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="selectEleven"
+                        value={selectEleven}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => selectElevenchange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+               
                     </div>
                   </div>
                     </div>
@@ -618,10 +616,10 @@ Developmental Need is required</span>}
                           id="demo-select-small"
                           defaultValue="Select"
                           className="email_login"
-                          name="selectOne"
+                          name="commOne"
                           // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                          onChange={e => commOnechange(e.target.value)}
                           required
                         >
                           
@@ -630,10 +628,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+                    
                       </FormControl>
                    
                     </div>
@@ -645,7 +640,7 @@ Developmental Need is required</span>}
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
 
-                  <h6 className="mt-4"><b>Leadership Promise  </b></h6>
+                
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -685,6 +680,7 @@ Developmental Need is required</span>}
               </div>  
               
               <div className="row d-flex justify-content-center">
+              <h6 className="text-center newHead p-2"><b>Support of Objectways Values  </b></h6>
                 <div className="col-3">
                   <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
@@ -703,17 +699,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="commTwo"
+                        value={commTwo}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => commTwochange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+                    
                     </div>
                   </div>
                     </div>
@@ -729,17 +723,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="rateMain"
+                        value={rateMain}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => rateMainchange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+                 
                     </div>
                   </div>
                     </div>
@@ -756,10 +748,10 @@ Developmental Need is required</span>}
                           id="demo-select-small"
                           defaultValue="Select"
                           className="email_login"
-                          name="selectOne"
+                          name="date"
                           // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                          onChange={e => datechange(e.target.value)}
                           required
                         >
                           
@@ -768,10 +760,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+                  
                       </FormControl>
                    
                     </div>
@@ -799,17 +788,14 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="sign"
+                        value={sign}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e =>signchange(e.target.value)}
                         required
                       />
                   
-                   
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+              
                     </div>
                   </div>
                     </div>
@@ -825,17 +811,12 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+               
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+             
                     </div>
                   </div>
                     </div>
@@ -855,7 +836,7 @@ Developmental Need is required</span>}
                           name="selectOne"
                           // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                          onChange={e => twlChange(e.target.value)}
                           required
                         >
                           
@@ -864,10 +845,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+                   
                       </FormControl>
                    
                     </div>
@@ -895,17 +873,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="thirteen"
+                        value={thirteen}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => thirteenChange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+                
                     </div>
                   </div>
                     </div>
@@ -921,17 +897,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="fourteen"
+                        value={fourteen}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => fourteenChange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+               
                     </div>
                   </div>
                     </div>
@@ -951,7 +925,7 @@ Developmental Need is required</span>}
                           name="selectOne"
                           // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                          onChange={e => twllChange(e.target.value)}
                           required
                         >
                           
@@ -960,10 +934,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+      
                       </FormControl>
                    
                     </div>
@@ -991,17 +962,14 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="fivteen"
+                        value={fivteen}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => fivteenChange(e.target.value)}
                         required
                       />
                   
-                   
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+           
                     </div>
                   </div>
                     </div>
@@ -1017,17 +985,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="sixteen"
+                        value={sixteen}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => sixChange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+         
                     </div>
                   </div>
                     </div>
@@ -1047,7 +1013,7 @@ Developmental Need is required</span>}
                           name="selectOne"
                           // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                          onChange={e => sevenChange(e.target.value)}
                           required
                         >
                           
@@ -1056,10 +1022,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+               
                       </FormControl>
                    
                     </div>
@@ -1071,7 +1034,7 @@ Developmental Need is required</span>}
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
 
-                  <h6 className="mt-4"><b>Interpersonal Skills  </b></h6>
+              
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1113,6 +1076,7 @@ Developmental Need is required</span>}
               </div>
 
               <div className="row d-flex justify-content-center">
+              <h6 className="text-center newHead p-2"><b>Support of Objectways Values  </b></h6>
                 <div className="col-3">
                   <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
@@ -1131,17 +1095,14 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="eightteen"
+                        value={eightteen}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => eightChange(e.target.value)}
                         required
                       />
                   
-                   
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+              
                     </div>
                   </div>
                     </div>
@@ -1158,16 +1119,14 @@ Developmental Need is required</span>}
                         className="email_login"
                         type="text"
                         name="name"
-                        value={name}
+                        value={nineteen}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => nineChange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+            
                     </div>
                   </div>
                     </div>
@@ -1187,7 +1146,7 @@ Developmental Need is required</span>}
                           name="selectOne"
                           // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                          onChange={e => twentyChange(e.target.value)}
                           required
                         >
                           
@@ -1196,10 +1155,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+           
                       </FormControl>
                    
                     </div>
@@ -1227,17 +1183,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="twyone"
+                        value={twyone}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => twyoneChange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+            
                     </div>
                   </div>
                     </div>
@@ -1253,17 +1207,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="twytwo"
+                        value={twytwo}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => twytwoChange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+              
                     </div>
                   </div>
                     </div>
@@ -1283,7 +1235,7 @@ Developmental Need is required</span>}
                           name="selectOne"
                           // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                          onChange={e => twythreeChange(e.target.value)}
                           required
                         >
                           
@@ -1292,10 +1244,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+        
                       </FormControl>
                    
                     </div>
@@ -1323,17 +1272,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="twyfour"
+                        value={twyfour}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => twyfourChange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+           
                     </div>
                   </div>
                     </div>
@@ -1349,17 +1296,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="twyfive"
+                        value={twyfive}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => twyfiveChange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+        
                     </div>
                   </div>
                     </div>
@@ -1379,7 +1324,7 @@ Developmental Need is required</span>}
                           name="selectOne"
                           // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                          onChange={e => twysixChange(e.target.value)}
                           required
                         >
                           
@@ -1388,10 +1333,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+                
                       </FormControl>
                    
                     </div>
@@ -1419,17 +1361,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="twyseven"
+                        value={twyseven}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e => twysevenChange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+              
                     </div>
                   </div>
                     </div>
@@ -1445,17 +1385,15 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
+                        name="twyeight"
+                        value={twyeight}
                         onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                        onChange={e =>twyeightChange(e.target.value)}
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+                 
                     </div>
                   </div>
                     </div>
@@ -1475,7 +1413,7 @@ Developmental Need is required</span>}
                           name="selectOne"
                           // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                          onChange={e => twynineChange(e.target.value)}
                           required
                         >
                           
@@ -1484,10 +1422,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+                 
                       </FormControl>
                    
                     </div>
@@ -1498,7 +1433,7 @@ Developmental Need is required</span>}
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
 
-                  <h6 className="mt-4"><b>Demonstartion of Results  </b></h6>
+              
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1540,7 +1475,9 @@ Developmental Need is required</span>}
               </div>
 
               <div className="row d-flex justify-content-center">
+              <h6 className="text-center newHead p-2"><b>Support of Objectways Values  </b></h6>
                 <div className="col-3">
+                  
                   <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
@@ -1558,17 +1495,12 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                     
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+             
                     </div>
                   </div>
                     </div>
@@ -1584,17 +1516,11 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                     
                         required
                       />
                   
-                   
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+           
                     </div>
                   </div>
                     </div>
@@ -1612,9 +1538,7 @@ Developmental Need is required</span>}
                           defaultValue="Select"
                           className="email_login"
                           name="selectOne"
-                          // value={value}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                        
                           required
                         >
                           
@@ -1623,10 +1547,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+              
                       </FormControl>
                    
                     </div>
@@ -1653,17 +1574,12 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                   
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+              
                     </div>
                   </div>
                     </div>
@@ -1679,17 +1595,12 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                   
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+                 
                     </div>
                   </div>
                     </div>
@@ -1706,10 +1617,7 @@ Developmental Need is required</span>}
                           id="demo-select-small"
                           defaultValue="Select"
                           className="email_login"
-                          name="selectOne"
-                          // value={value}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                       
                           required
                         >
                           
@@ -1718,10 +1626,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+            
                       </FormControl>
                    
                     </div>
@@ -1748,17 +1653,12 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                   
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+            
                     </div>
                   </div>
                     </div>
@@ -1774,17 +1674,12 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                   
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+           
                     </div>
                   </div>
                     </div>
@@ -1801,10 +1696,7 @@ Developmental Need is required</span>}
                           id="demo-select-small"
                           defaultValue="Select"
                           className="email_login"
-                          name="selectOne"
-                          // value={value}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                      
                           required
                         >
                           
@@ -1813,105 +1705,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
-                      </FormControl>
-                   
-                    </div>
-                  </div>
 
-                </div>
-              </div>
-              <div className="row d-flex justify-content-center">
-                <div className="col-3">
-                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
-                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
-                  </p> */}
-                </div>
-                <div className="col-7 d-flex flex-row gap-5">
-                 
-                  <div className="form-group mt-2 d-flex justify-content-center">
-                    <div>
-                    <div className="col  mt-1">
-                    <div>
-                      <TextField
-                        sx={{ width: 185 }}
-                       placeholder="Strength"
-                        id="outlined-size-small"
-                        size="small"
-                        className="email_login"
-                        type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
-                        required
-                      />
-                  
-                   
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
-                    </div>
-                  </div>
-                    </div>
-                  </div>
-                  <div className="form-group mt-2 d-flex justify-content-center">
-                    <div>
-                    <div className="col  mt-1">
-                    <div>
-                      <TextField
-                        sx={{ width: 185 }}
-                       placeholder="Proficient"
-                        id="outlined-size-small"
-                        size="small"
-                        className="email_login"
-                        type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
-                        required
-                      />
-                  
-                   
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
-                    </div>
-                  </div>
-                    </div>
-                  </div>
-                  <div className="form-group mt-1 selectDefault d-flex justify-content-center">
-                    <div>
-                      <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
-                        {/* <InputLabel id="demo-select-small">
-                          Select
-                        </InputLabel> */}
-                        <Select
-                          sx={{ width: 180 }}
-                          labelId="demo-select-small"
-                          id="demo-select-small"
-                          defaultValue="Select"
-                          className="email_login"
-                          name="selectOne"
-                          // value={value}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
-                          required
-                        >
-                          
-                          
-                          <MenuItem value="Select">Select One</MenuItem>
-                          <MenuItem value="Exceeds expectations">Yes</MenuItem>
-                          <MenuItem value="Meets expectations">No</MenuItem>
-                        </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
                       </FormControl>
                    
                     </div>
@@ -1923,7 +1717,6 @@ Developmental Need is required</span>}
               <div className="row d-flex justify-content-center">
                 <div className="col-3">
 
-                  <h6 className="mt-4"><b>Developmental Orientation  </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
                   </p> */}
                 </div>
@@ -1965,6 +1758,7 @@ Developmental Need is required</span>}
               </div>
 
               <div className="row d-flex justify-content-center">
+              <h6 className="text-center newHead p-2"><b>Support of Objectways Values  </b></h6>
                 <div className="col-3">
                   <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
                   {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
@@ -1983,17 +1777,13 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                    
+                   
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+
                     </div>
                   </div>
                     </div>
@@ -2009,17 +1799,13 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                     
+                    
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+ 
                     </div>
                   </div>
                     </div>
@@ -2036,10 +1822,9 @@ Developmental Need is required</span>}
                           id="demo-select-small"
                           defaultValue="Select"
                           className="email_login"
-                          name="selectOne"
+                    
                           // value={value}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                    
                           required
                         >
                           
@@ -2048,10 +1833,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+        
                       </FormControl>
                    
                     </div>
@@ -2079,17 +1861,13 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                  
+                   
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+       
                     </div>
                   </div>
                     </div>
@@ -2105,17 +1883,13 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                       
+                      
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+
                     </div>
                   </div>
                     </div>
@@ -2132,10 +1906,9 @@ Developmental Need is required</span>}
                           id="demo-select-small"
                           defaultValue="Select"
                           className="email_login"
-                          name="selectOne"
+                   
                           // value={value}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                        
                           required
                         >
                           
@@ -2144,10 +1917,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+          
                       </FormControl>
                    
                     </div>
@@ -2175,17 +1945,13 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                      
+                 
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+ 
                     </div>
                   </div>
                     </div>
@@ -2201,17 +1967,13 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                    
+                  
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+              
                     </div>
                   </div>
                     </div>
@@ -2228,10 +1990,9 @@ Developmental Need is required</span>}
                           id="demo-select-small"
                           defaultValue="Select"
                           className="email_login"
-                          name="selectOne"
+                       
                           // value={value}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                      
                           required
                         >
                           
@@ -2240,10 +2001,7 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+               
                       </FormControl>
                    
                     </div>
@@ -2270,17 +2028,12 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+              
+             
                         required
                       />
                   
-                   
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Strength is required</span>}
-                      </div>
+           
                     </div>
                   </div>
                     </div>
@@ -2296,17 +2049,13 @@ Developmental Need is required</span>}
                         size="small"
                         className="email_login"
                         type="text"
-                        name="name"
-                        value={name}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => namechange(e.target.value)}
+                
+                 
                         required
                       />
                   
                    
-                      <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Proficient is required</span>}
-                      </div>
+            
                     </div>
                   </div>
                     </div>
@@ -2323,10 +2072,9 @@ Developmental Need is required</span>}
                           id="demo-select-small"
                           defaultValue="Select"
                           className="email_login"
-                          name="selectOne"
+              
                           // value={value}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectOnechange(e.target.value)}
+                       
                           required
                         >
                           
@@ -2335,10 +2083,89 @@ Developmental Need is required</span>}
                           <MenuItem value="Exceeds expectations">Yes</MenuItem>
                           <MenuItem value="Meets expectations">No</MenuItem>
                         </Select>
-                        <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">
-Developmental Need is required</span>}
-                      </div>
+                 
+                      </FormControl>
+                   
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-row gap-5">
+                 
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <div className="col  mt-1">
+                    <div>
+                      <TextField
+                        sx={{ width: 185 }}
+                       placeholder="Strength"
+                        id="outlined-size-small"
+                        size="small"
+                        className="email_login"
+                        type="text"
+              
+             
+                        required
+                      />
+                  
+           
+                    </div>
+                  </div>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <div className="col  mt-1">
+                    <div>
+                      <TextField
+                        sx={{ width: 185 }}
+                       placeholder="Proficient"
+                        id="outlined-size-small"
+                        size="small"
+                        className="email_login"
+                        type="text"
+                
+                 
+                        required
+                      />
+                  
+                   
+            
+                    </div>
+                  </div>
+                    </div>
+                  </div>
+                  <div className="form-group mt-1 selectDefault d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+              
+                          // value={value}
+                       
+                          required
+                        >
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Yes</MenuItem>
+                          <MenuItem value="Meets expectations">No</MenuItem>
+                        </Select>
+                 
                       </FormControl>
                    
                     </div>

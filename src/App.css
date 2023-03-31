@@ -8,6 +8,13 @@ body{
 .selectDefault{
   margin-left: -12.2px;
 }
+.newHead{
+  padding-left: -10px !important;
+  width: 91%;
+  border-radius: 5px;
+  background-color: #46227f;
+  color: white;
+}
 .bg{
   padding-bottom: 50px;
 }
@@ -26,6 +33,9 @@ body{
 }
 .wholerow{
   border-radius: 0px 5px 5px 0px !important;
+  background-color: #d9cce0;
+  margin-top: 20px !important;
+  border: 0.5px solid gray;
 }
 .textOne{
   font-size: 40px;
