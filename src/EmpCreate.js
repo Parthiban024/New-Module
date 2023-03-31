@@ -238,7 +238,7 @@ const EmpCreate = () => {
                         required
                       />
                         <div className="d-flex">
-                        {name.length === 0 && validation && <span className="text-danger">Date is required</span>}
+                        {name.length === 0 && validation && <span className= "text-danger">Date is required</span>}
                       </div>
                     </div>
                   </div>
