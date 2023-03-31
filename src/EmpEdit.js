@@ -25,7 +25,7 @@
 // const EmpEdit = () => {
 //   const{ empid }=useParams();
  
-//   // const [empdata,empdatachange]=useState({})
+//   const [empdata,empdatachange]=useState({})
 //   useEffect(()=> {
 //     fetch("http://localhost:8000/employee/"+empid).then((res) => {
 //       return res.json();

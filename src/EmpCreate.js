@@ -25,6 +25,8 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 // import React, { useRef } from 'react';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import { display, style } from "@mui/system";
+// import { win32 } from "path";
 
 const EmpCreate = () => {
 
@@ -34,8 +36,8 @@ const EmpCreate = () => {
   const [emppid, emppidchange] = useState("");
   const [reviewerName, reviewerNamechange] = useState("");
   const [reviewerNameTwo, reviewerNameTwochange] = useState("");
-  const [reviewPeriod, reviewPeriodchange] = useState("");
-  const [reviewPeriodTwo, reviewPeriodtwochange] = useState("");
+  const [reviewPeriod, reviewPeriodchange] = useState("01/07/2021");
+  const [reviewPeriodTwo, reviewPeriodtwochange] = useState("30/06/2022");
   const [selectOne, selectOnechange] = useState("");
   const [selectTwo, selectTwochange] = useState("");
   const [selectThree, selectThreechange] = useState("");
@@ -53,55 +55,46 @@ const EmpCreate = () => {
   // const [date, datechange] = useState("");
   // const [sign, signchange] = useState("");
   const [validation, valchange] = useState("");
-
+  const [value, setValue] = useState('Select One');
   const formRef = useRef(null);
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => {  
 
-    const submitButton = document.querySelector('button[type="submit"]');
-    if (submitButton) {
-      submitButton.style.display = 'none';
-    }
     e.preventDefault();
-    const empdata = { name, emppid, reviewerName, selectEleven, reviewerNameTwo, rateMain, commOne, commTwo, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen };
-// Hide the "Submit" button from the PDF
+    // Hide the "Submit" button from the form
+    // Hide the "Submit" button from the form
+    const submitButton = document.getElementById("submit");
+    submitButton.style.display = "none";
+    
+    // Get the form data
+    const empdata = { name, emppid, reviewerName, reviewerNameTwo, rateMain, commOne, commTwo, reviewPeriod, reviewPeriodTwo, selectOne, selectTwo, selectThree, selectFour, selectFive, selectSix, selectSeven, selectEight, selectNine, selectTen };
+    
+    // Take a screenshot of the form
     html2canvas(formRef.current).then(canvas => {
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF();
-
+    
       // Calculate the page height based on the aspect ratio of the screenshot image
       const pageHeight = pdf.internal.pageSize.getWidth() * canvas.height / canvas.width;
-
+    
       // Add the screenshot image to the PDF document
-      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pdf.internal.pageSize.getHeight());
-
+      pdf.addImage(canvas.toDataURL("image/png"), "PNG", 0, 0, pdf.internal.pageSize.getWidth(), pageHeight);
+    
+      // Add empdata to the PDF document
+      // pdf.text(JSON.stringify(empdata), 10, pageHeight + 10);
+    
       // Download the PDF document
       pdf.save(`${empdata.name}.${empdata.emppid}.pdf`);
+    
+      // Show the "Submit" button again
+      submitButton.style.display = "block";
+      
     });
-    if (submitButton) {
-      submitButton.style.display = '';
-    }
-      // Restore the "Submit" button after the PDF is generated
-    // fetch("http://localhost:8000/employee", {
-    //   method: "POST",
-    //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify(empdata)
-    // }).then((res) => {
-    //   Swal.fire(
-    //     'Data Saved!',
-    //     'You clicked the button!',
-    //     'success'
-    //   )
-    //   navigate('/popup');
-    // }).catch((err) => {
-    //   console.log(err.message)
-    // })
 
-
-  }
+   }
   return (
     <form autoComplete="off" className="scroll-to" onSubmit={handleSubmit} id="scrollable-div" ref={formRef}>
       <div className="font_family">
-        <div className="container px-5 mt-5 bg">
+        <div className="container px-5 bg">
           <div className="row">
   
             <div className="col  setTwo wholerow " >
@@ -109,7 +102,7 @@ const EmpCreate = () => {
                 <img src={Objectways} alt="Logo" className='logo_details mt-3 ' />
               </div>
               <h3 className="textOne d-flex justify-content-center app mt-4 emp_list_head b-heading">
-                ANNUAL APPRAISAL FORM
+              Acceleration Pool Nomination Form 
 
               </h3>
 
@@ -127,7 +120,7 @@ const EmpCreate = () => {
                     <div>
                       <TextField
                         sx={{ width: 400 }}
-                        label="Employee Name"
+                       placeholder="Nominee Name"
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
@@ -138,6 +131,8 @@ const EmpCreate = () => {
                         onChange={e => namechange(e.target.value)}
                         required
                       />
+                  
+                   
                       <div className="d-flex">
                         {name.length === 0 && validation && <span className="text-danger">Employee Name is required</span>}
                       </div>
@@ -150,11 +145,11 @@ const EmpCreate = () => {
                     <div class="mt-3">
                       <TextField
                         sx={{ width: 400 }}
-                        label="Employee ID"
+                      placeholder="Department"
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
-                        type="number"
+                        type="text"
                         name="emppid"
                         value={emppid}
                         onMouseDown={e => valchange(true)}
@@ -176,7 +171,7 @@ const EmpCreate = () => {
                     <div class="mt-4">
                       <TextField
                         sx={{ width: 400 }}
-                        label="Reviewer Name"
+                        placeholder="Nominated By"
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
@@ -199,7 +194,7 @@ const EmpCreate = () => {
                     <div>
                       <TextField
                         // label="Date"
-                        sx={{ width: 200 }}
+                        sx={{ width: 400 }}
                         id="outlined-size-small"
                         size="small"
                         className="email_login"
@@ -211,25 +206,7 @@ const EmpCreate = () => {
                         required
                       />
                       <div>
-                        {reviewPeriod.length === 0 && validation && <span className="text-danger">Start date is Required</span>}
-                      </div>
-                    </div>
-                    <div class="ms-2">
-                      <TextField
-                        // label="Date"
-                        sx={{ width: 200 }}
-                        id="outlined-size-small"
-                        size="small"
-                        className="email_login"
-                        type="date"
-                        name="reviewPeriodTwo"
-                        value={reviewPeriodTwo}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => reviewPeriodtwochange(e.target.value)}
-                        required
-                      />
-                      <div>
-                        {reviewPeriodTwo.length === 0 && validation && <span className="text-danger">End Date is Required</span>}
+                         <span className=""><strong>DATE</strong></span>
                       </div>
                     </div>
                   </div>
@@ -238,42 +215,430 @@ const EmpCreate = () => {
               </div>
 
 
-              <div className="mt-4 mx-5  heading ">
-                <h5 class="ms-2 p-1">II. CORE VALUES AND OBJECTIVES</h5>
-              </div>
-
               <div className="row d-flex justify-content-center">
-                <div className="col-5">
-                  <h5 class="my-3 c-blue"><b>PERFORMANCE CATEGORY</b></h5>
-                  <h6><b>Quality of Work:</b></h6>
-                  <p class="mt-2"><h6>Work is completed accurately (few
-                    or no errors), efficiently and within
-                    deadlines with minimal supervision</h6>
-                  </p>
+                <div className="col-3">
+                  <h5 class="my-3 c-blue"><b>Leadership Area </b></h5>
+                  <h6><b>Support of Objectways Values  </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
                 </div>
-                <div className="col-5">
-                  <h5 className="text-center my-3 c-blue"><b>RATING</b></h5>
-                  <div className="form-group mt-3 d-flex justify-content-center">
+                <div className="col-7 d-flex flex-roww">
+                 
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className="ms-5 c-blue"><b>Strength</b></h5>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className="ms-5 c-blue"><b>Proficient</b></h5>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                    <h5 className=" c-blue"><b>Developmental Need</b></h5>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+                  <h6 className="mt-4"><b>Behaves Consistently with values    </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+                 
+                  <div className="form-group mt-2 d-flex justify-content-center">
                     <div>
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
-                          sx={{ width: 250 }}
-
+                          sx={{ width: 180 }}
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
                           name="selectOne"
-                          value={selectOne}
+                          // value={value}
                           onMouseDown={e => valchange(true)}
                           onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+                  <h6 className="mt-4"><b>Displays respect for others    </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+                 
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+             
+                  <h6 className="mt-4"><b>Is a good team player    </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+                 
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+              
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -287,33 +652,78 @@ const EmpCreate = () => {
               </div>
 
               <div className="row d-flex justify-content-center">
-                <div className="col-5">
-                  <h6><b>Attendance & Punctuality:</b></h6>
-                  <p class="mt-2"><h6>Reports for work on time, provides
-                    advance notice of need for absence</h6>
-                  </p>
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Leadership Promise  </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
                 </div>
-                <div className="col-5">
-                  <div className="form-group mt-3 d-flex justify-content-center">
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
                     <div>
+
                       <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+              
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Is motivated to lead  </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
                         <Select
-                          sx={{ width: 250 }}
+                          sx={{ width: 180 }}
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectTwo"
-                          value={selectTwo}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectTwochange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -322,13 +732,3061 @@ const EmpCreate = () => {
                       </FormControl>
                     </div>
                   </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
 
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
                 </div>
-
-
-
-
               </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Accepts Leadership responiblity   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Mobilizes resource/people to action   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Leads teams that have high morates   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Interpersonal Skills  </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                    
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                      
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Communicates clearly and effectively   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Makes effective presentations   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Demonstrates diplomacy  </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Is trusted and respected   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Demonstartion of Results  </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                      
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Shows positive team/unit results </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Displays objective indicators of success  </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Accomplishers major assignments   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Developmental Orientation  </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+              
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Has accurate self-insight   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Is Coachable; accepts feedback  </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Has history of learning from experience  </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Quickly learns new tasks  </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Self-initiates developments activities </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="row d-flex justify-content-center">
+                <div className="col-3">
+
+                  <h6 className="mt-4"><b>Identifies with management   </b></h6>
+                  {/* <p class="mt-2"><h6>Support of Objectways Values  </h6>
+                  </p> */}
+                </div>
+                <div className="col-7 d-flex flex-roww">
+
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 180 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                  <div className="form-group mt-2 d-flex justify-content-center">
+                    <div>
+
+                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
+                          Select
+                        </InputLabel> */}
+                        <Select
+                          sx={{ width: 100 }}
+                          labelId="demo-select-small"
+                          id="demo-select-small"
+                          defaultValue="Select"
+                          className="email_login"
+                          name="selectOne"
+                          // value={value}
+                          onMouseDown={e => valchange(true)}
+                          onChange={e => selectOnechange(e.target.value)}
+                          required
+                        >
+
+
+                          <MenuItem value="Select">Select One</MenuItem>
+                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
+                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
+                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
+                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+
+
+              
+
+
               <div className="row d-flex justify-content-center">
                 <div className="col-5">
                   <h6><b>Reliability/Dependability:</b></h6>
@@ -340,25 +3798,25 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectThree"
-                          value={selectThree}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectThreechange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -386,25 +3844,25 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectFour"
-                          value={selectFour}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectFourchange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -433,25 +3891,25 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectFive"
-                          value={selectFive}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectFivechange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -481,25 +3939,25 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectSix"
-                          value={selectSix}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectSixchange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -525,25 +3983,25 @@ const EmpCreate = () => {
                 <div className="col-5">
                   <div className="form-group mt-3 d-flex justify-content-center">
                     <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
+                    <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
+                        {/* <InputLabel id="demo-select-small">
                           Select
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                           sx={{ width: 250 }}
-
                           labelId="demo-select-small"
                           id="demo-select-small"
-                          label="Select"
+                          defaultValue="Select"
                           className="email_login"
-                          name="selectSeven"
-                          value={selectSeven}
+                          name="selectOne"
+                          // value={value}
                           onMouseDown={e => valchange(true)}
-                          onChange={e => selectSevenchange(e.target.value)}
+                          onChange={e => selectOnechange(e.target.value)}
                           required
                         >
-                          <MenuItem value="">
-                          </MenuItem>
+                          
+                          
+                          <MenuItem value="Select">Select One</MenuItem>
                           <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
                           <MenuItem value="Meets expectations">Meets expectations</MenuItem>
                           <MenuItem value="Needs improvement">Needs improvement</MenuItem>
@@ -559,258 +4017,14 @@ const EmpCreate = () => {
 
 
               </div>
-              {/* <div className="mt-4">
-                   <h5>III. JOB-SPECIFIC PERFORMANCE CRITERIA</h5>
-            </div> */}
-
-              <div className="mt-4 mx-5 heading ">
-                <h5 class="ms-2 p-1">III. JOB-SPECIFIC PERFORMANCE CRITERIA</h5>
-              </div>
-
-
-              <div className="row d-flex justify-content-center">
-
-                <div className="col-5">
-                  {/* <h5>Performance Category</h5> */}
-                  <h5 class="my-3 c-blue"><b>PERFORMANCE CATEGORY</b></h5>
-                  <h6><b>Knowledge of Position:</b></h6>
-                  <p class="mt-2"><h6>Possesses required skills,
-                    knowledge, and abilities to
-                    competently perform the job</h6>
-                  </p>
-                </div>
-                <div className="col-5">
-                  {/* <h5 class="my-3 c-blue">Performance Category</h5> */}
-                  <h5 className="text-center my-3 c-blue"><b>RATING</b></h5>
-                  <div className="form-group mt-3 d-flex justify-content-center">
-
-                    <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
-                          Select
-                        </InputLabel>
-                        <Select
-                          sx={{ width: 250 }}
-
-                          labelId="demo-select-small"
-                          id="demo-select-small"
-                          label="Select"
-                          className="email_login"
-                          name="selectEight"
-                          value={selectEight}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectEightchange(e.target.value)}
-                          required
-                        >
-                          <MenuItem value="">
-                          </MenuItem>
-                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
-                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
-                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
-                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </div>
-                  </div>
-
-                </div>
-
-
-
-
-              </div>
-              <div className="row d-flex justify-content-center">
-                <div className="col-5">
-                  <h6><b>Training & Development:</b></h6>
-                  <p class="mt-2"><h6>Continually seeks ways to
-                    strengthen performance and
-                    regularly monitors new
-                    developments in field of work</h6>
-                  </p>
-                </div>
-                <div className="col-5">
-                  <div className="form-group mt-3 d-flex justify-content-center">
-                    <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
-                          Select
-                        </InputLabel>
-                        <Select
-                          sx={{ width: 250 }}
-
-                          labelId="demo-select-small"
-                          id="demo-select-small"
-                          label="Select"
-                          className="email_login"
-                          name="selectNine"
-                          value={selectNine}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectNinechange(e.target.value)}
-                          required
-                        >
-                          <MenuItem value="">
-                          </MenuItem>
-                          <MenuItem value="Exceeds expectations">Exceeds expectations</MenuItem>
-                          <MenuItem value="Meets expectations">Meets expectations</MenuItem>
-                          <MenuItem value="Needs improvement">Needs improvement</MenuItem>
-                          <MenuItem value="Unacceptable">Unacceptable</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </div>
-                  </div>
-
-                </div>
-
-
-
-
-              </div>
-
-              <div className="mt-4 mx-5 heading ">
-                <h5 class="ms-2 p-1 ">IV. OVERALL RATING</h5>
-              </div>
-
-
-              <div className="row d-flex justify-content-center">
-                <div className="col-11">
-                  <div class=" row my-3 ms-5"><div class="col-3"><b>(A) EXCEEDS EXPECTATIONS</b></div><div class="col-9">(Employee consistently performs at a high level that exceeds expectations)</div></div>
-                  <div class="row my-3 mt-2 ms-5"><div div class="col-3"><b>(B) MEETS EXPECTATIONS</b></div><div class="col-9">(Employee satisfies all essential job requirements;may exceed expectations periodically; demonstrates likelihood of eventually exceeding expectations)</div></div>
-                  <div class="row my-3 ms-5"><div div class="col-3"><b>(C) NEEDS EXPECTATIONS</b> </div><div class="col-9">(Employee consistently performs below required standards/expectations for the position; training or other action is necessary to correct performance)</div></div>
-                  <div class="row my-3 ms-5"><div div class="col-3"><b>(D) UNACCEPTABLE </b></div><div class="col-9">(Employee is unable or unwilling to perform required duties according to company standards;immediate improvement must be demonstrated)</div></div>
-                </div>
-              </div>
-
-
-              <div className="row d-flex justify-content-center">
-                <div className="col-5">
-                </div>
-                <div className="col-5">
-                  <div className="form-group mt-3 d-flex justify-content-center">
-                    <div>
-                      <FormControl sx={{ m: 1, minWidth: 210 }} size="small">
-                        <InputLabel id="demo-select-small">
-                          Select
-                        </InputLabel>
-                        <Select
-                          sx={{ width: 250 }}
-
-                          labelId="demo-select-small"
-                          id="demo-select-small"
-                          label="Select"
-                          className="email_login"
-                          name="selectTen"
-                          value={selectTen}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectTenchange(e.target.value)}
-                          required
-                        >
-                          <MenuItem value="">
-                          </MenuItem>
-                          <MenuItem value="Exceeds expectations"><b>(A)</b>Exceeds expectations</MenuItem>
-                          <MenuItem value="Meets expectations"><b>(B)</b>Meets expectations</MenuItem>
-                          <MenuItem value="Needs improvement"><b>(C)</b>Needs improvement</MenuItem>
-                          <MenuItem value="Unacceptable"><b>(D)</b>Unacceptable</MenuItem>
-                        </Select>
-                      </FormControl>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-              <div class="mb-3  mx-5 ">
-                <label for="exampleFormControlTextarea1" class="form-label"><h5>Comment on the employee's overall performance:</h5></label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                  name="commOne"
-                  value={commOne}
-                  onMouseDown={e => valchange(true)}
-                  onChange={e => commOnechange(e.target.value)}
-                ></textarea>
-              </div>
-
-              <div className="mt-5 mx-5  heading">
-                <h5 class="ms-2   p-1">V. REVIEWER COMMENTS (optional)</h5>
-              </div>
-              <div class="mx-5 mt-3">
-                <textarea class="form-control  " id="exampleFormControlTextarea1" rows="3"
-                  name="commTwo"
-                  value={commTwo}
-                  onMouseDown={e => valchange(true)}
-                  onChange={e => commTwochange(e.target.value)}
-                ></textarea></div>
-              {/* </div> */}
-
-              <div className="mt-5 mx-5 heading ">
-                <h5 class="ms-2 p-1 " >VI. ACKNOWLEDGEMENT</h5>
-              </div>
-              <div className="row d-flex justify-content-center">
-                <div className="col-5">
-                  <div className="form-group mt-4 d-flex">
-                    <div>
-                      <FormControl size="small">
-                        <InputLabel id="demo-select-small">
-                          Overall Rating
-                        </InputLabel>
-                        <Select
-                          sx={{ width: 400 }}
-
-                          labelId="demo-select-small"
-                          id="demo-select-small" 
-                          label="Overall Rating"
-                          className="email_login"
-                          name="selectEleven"
-                          value={selectEleven}
-                          onMouseDown={e => valchange(true)}
-                          onChange={e => selectElevenchange(e.target.value)}
-                          required
-                        >
-                          <MenuItem value="">
-                          </MenuItem>
-                          <MenuItem value="Exceeds expectations"><b>(A)</b></MenuItem>
-                          <MenuItem value="Meets expectations"><b>(B)</b></MenuItem>
-                          <MenuItem value="Needs improvement"><b>(C)</b></MenuItem>
-                          <MenuItem value="Unacceptable"><b>(D)</b></MenuItem>
-                        </Select>
-                      </FormControl>
-                    </div>
-                  </div>
-
-                </div>
-
-                {/* date */}
-                <div className="col-5">
-                  {/* <div className="form-group mt-4 d-flex justify-content-center"> */}
-                  <div className="row ">
-                    {/* <h4 class="  ">Reviewer Name</h4> */}
-
-                    <div class="mt-4">
-                      <TextField
-                        sx={{ width: 400 }}
-                        label="Reviewer Name"
-                        id="outlined-size-small"
-                        size="small"
-                        className="email_login"
-                        type="text"
-                        name="reviewerNameTwo"
-                        value={reviewerNameTwo}
-                        onMouseDown={e => valchange(true)}
-                        onChange={e => reviewerNameTwochange(e.target.value)}
-                        required
-                      />
-                      <div>
-                        {reviewerName.length === 0 && validation && <span className="text-danger">Reviewer Name is required</span>}
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
+         
               <div className="btn_bg">
                 <div className=" pb-5 container d-flex justify-content-center">
                   <input
                     type="submit"
                     className="btn btn-primary submit"
                     value="Submit"
+                    id="submit"
                   ></input>
                 </div>
               </div>
